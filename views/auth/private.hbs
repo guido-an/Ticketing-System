@@ -1,0 +1,10 @@
+private page
+
+
+<h1>Hello {{values.[0].username}}</h1>
+
+{{#each values.[1]}}
+  <h2>{{title}}</h2>
+  <a href="/tickets/{{id}}">View ticket</a>
+{{/each}}
+
