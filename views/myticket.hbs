@@ -1,3 +1,25 @@
 my ticket 
-<h2>{{ticket.title}}</h2>
-<p>{{ticket.message}}</p>
+{{!-- values.[0] = user --}}
+{{!-- values.[1] = ticket --}}
+
+<h2>{{values.[1].title}}</h2>
+<hr>
+<strong>{{values.[0].username}}</strong><p>{{values.[1].message}}</p>
+
+<hr>
+{{#each values.[1].answers}}
+ <strong>{{username}}</strong>
+  <p>{{message}}</p> 
+{{/each}}
+<hr>
+
+
+<form action="/answer" method="POST">
+answer
+<input hidden value={{values.[1]._id}} name="_id">
+
+<input type="text" name="message">
+<button>Add answer</button>
+</form>
+
+

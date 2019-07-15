@@ -74,7 +74,7 @@ router.get("/private", (req, res, next) => {
 
   Promise.all([user, tickets])
   .then((values) => {
-    console.log("this are the values to private page", values)
+    
    res.render("auth/private", { values: values } )
   })
  .catch((err) => {
