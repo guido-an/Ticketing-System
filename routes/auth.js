@@ -15,14 +15,8 @@ router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
 
-// router.post("/login", passport.authenticate("local", {
-//   successRedirect: "/",
-//   failureRedirect: "/auth/login",
-//   failureFlash: true,
-//   passReqToCallback: true
-// }));
-
-/* POST LOGIN page */
+/******************************
+1) POST login  *********/
 router.post('/login', (req, res) => {
   let currentUser;
   User.findOne({username: req.body.username})
@@ -40,7 +34,7 @@ router.post('/login', (req, res) => {
       if(passwordCorrect) {
         req.session.currentUser = currentUser
         res.redirect("/auth/private")
-        console.log("this is the user: ", currentUser)
+        
       } else {
         res.render("auth/login", {
           errorMessage: "Incorrect password"
@@ -49,7 +43,8 @@ router.post('/login', (req, res) => {
     })
 })
 
-/** PROTECTED PAGE */
+/******************************
+1) USE and GET private  *********/
 router.use('/private', (req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in) go to the next step 
     next(); 
@@ -57,17 +52,7 @@ router.use('/private', (req, res, next) => {
     res.redirect("login");         
   }                            
 });       
-                   
-// router.get("/private", (req, res, next) => { 
-//    User.findOne({username: req.session.currentUser.username})
-//    .then((user) => {
-//     res.render("auth/private", { user: user } )
-//     console.log("user from get /private", user)
-//    })
-//   .catch((err) => {
-//     console.log(err)
-//   })
-// });     
+                        
 router.get("/private", (req, res, next) => { 
   const user = User.findOne({username: req.session.currentUser.username})
   const tickets = Ticket.find({user: ObjectId(req.session.currentUser._id)})
@@ -83,10 +68,14 @@ router.get("/private", (req, res, next) => {
 });    
 
 
+/******************************
+3) GET signup  *********/
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
+/******************************
+4) POST signup  *********/
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;

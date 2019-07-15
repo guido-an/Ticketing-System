@@ -62,18 +62,6 @@ router.get("/tickets", (req, res) => {
   }
 });
 
-/******************************
-5) GET ticket details  *********/
-// router.get("/tickets/:id", (req, res) => {
-//   Ticket.findById(req.params.id)
-//     .then(ticket => {
-//       console.log("my ticket", ticket)
-//       res.render("myticket", { ticket: ticket });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
 
 /******************************
 5) GET tickets details  *********/
