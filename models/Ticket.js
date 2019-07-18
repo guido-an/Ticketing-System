@@ -7,6 +7,7 @@ const ticketSchema = new Schema(
     status: String,
     title: { type: String, required: true },
     message: { type: String, required: true },
+    active: Boolean,
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     answers: Array
   },

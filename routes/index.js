@@ -32,7 +32,8 @@ router.post("/submit", (req, res) => {
   var myTicket = new Ticket({
     title: req.body.title,
     message: req.body.message,
-    user: req.body.user
+    user: req.body.user,
+    active: true
   });
   myTicket
     .save()
@@ -51,7 +52,6 @@ router.get("/tickets", (req, res) => {
   if (req.session.currentUser) {
     Ticket.find({ user: ObjectId(req.session.currentUser._id) })
       .then(tickets => {
-        console.log("the tickets cominggg", tickets);
         res.render("tickets", { tickets: tickets });
       })
       .catch(err => {
@@ -62,7 +62,6 @@ router.get("/tickets", (req, res) => {
   }
 });
 
-
 /******************************
 5) GET tickets details  *********/
 router.get("/tickets/:id", (req, res) => {
@@ -70,7 +69,7 @@ router.get("/tickets/:id", (req, res) => {
   const ticket = Ticket.findById(req.params.id);
   Promise.all([user, ticket])
     .then(values => {
-      res.render("myticket", { values: values });
+      res.render("userTicket", { values: values });
     })
     .catch(err => {
       console.log(err);
@@ -78,21 +77,22 @@ router.get("/tickets/:id", (req, res) => {
 });
 
 router.post("/answer", (req, res) => {
-  let { _id, message } = req.body // _id of the ticket (hidden input in myticket.hbs)
+  let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
 
   let newAnswer = {
     username: req.session.currentUser.username,
-    _id: _id,
     message: message
   };
-  
-  Ticket.updateOne(
-    { _id: _id },
-    { $push: { answers: newAnswer } },
-    { new: true }
-  )
+
+  Ticket.updateOne({
+    _id: _id,
+    $push: { answers: newAnswer },
+    $set: { active: true },
+    new: true
+  })
+
     .then(() => {
-      res.redirect("/auth/private")
+      res.redirect("/auth/private");
     })
     .catch(err => {
       console.log(err);

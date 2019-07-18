@@ -1,0 +1,22 @@
+admin ticket page
+
+
+<h1>{{ticket.title}}
+</h1>
+<p>{{ticket.message}}</p> 
+
+
+{{#each ticket.answers}}
+ <strong>{{username}}</strong>
+  <p>{{message}}</p> 
+{{/each}}
+<hr>
+
+<form action="/admin/answer" method="POST">
+answer
+<input hidden value={{ticket._id}} name="_id">
+
+<input type="text" name="message">
+<button>Add answer</button>
+</form>
+
