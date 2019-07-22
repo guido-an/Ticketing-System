@@ -1,14 +1,13 @@
-admin ticket page
-
-
 <h1>{{ticket.title}}
 </h1>
 <p>{{ticket.message}}</p> 
+<p>{{ticket.time}}</p>
 
 
 {{#each ticket.answers}}
- <strong>{{username}}</strong>
+ <strong>{{username}}</strong> <span>{{time}}</span>
   <p>{{message}}</p> 
+  
 {{/each}}
 <hr>
 

@@ -1,28 +1,38 @@
-admin page
+<form action="/admin/filter-by-status" method="GET">
 
-{{admin}}
-
-
+  <button type="submit">filter by status</button>
+</form>
 
 {{#each tickets}}
- {{#if active}}
+{{#if active}}
 
- <p>{{title}}</p>
-  <a href=/admin/tickets/{{id}}>View ticket</a>
-  <strong>this ticket need answer</strong>
- <form action="/admin/active-false" method="POST">
-  <input type="text" value={{_id}} name="_id">
-  <button type="submit">make active false</button>
- </form>
+<h1>{{title}}</h1>
+<a href=/admin/tickets/{{id}}>View ticket</a> <strong>this ticket need answer</strong>
+  <form action="/admin/active-false" method="POST">
+    <input type="text" value={{_id}} name="_id">
+    <button type="submit">make active false</button>
+  </form>
+
+  {{else}}
+
+  <h1>{{title}}</h1>
+  <a href=/admin/tickets/{{id}}>View ticket</a> <strong>Ticket ok</strong>
+    <form action="/admin/active-true" method="POST">
+      <input type="text" value={{_id}} name="_id">
+      <button type="submit">make active true</button>
+    </form>
+
+    {{/if}}
+    {{/each}}
+
+
  
- {{else}}
-
-  <p>{{title}}</p>
-  <a href=/admin/tickets/{{id}}>View ticket</a>
-  <strong>Ticket ok</strong>
-
- {{/if}}
-{{/each}}
+<h2>tickets by author</h2>
+    <ul>
+      {{#each tickets}}
+      <li><a href="/admin/filter-by-author/{{author}}">{{author}} tickets</a> </li>
+      {{/each}}
+    </ul>
 
 
-
+  

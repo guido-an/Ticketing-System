@@ -29,11 +29,16 @@ router.get("/submit", (req, res, next) => {
 /******************************
 3) POST submit  *********/
 router.post("/submit", (req, res) => {
-  var myTicket = new Ticket({
+  let today = new Date();
+  let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
+
+  let myTicket = new Ticket({
+    author: req.session.currentUser.username,
     title: req.body.title,
     message: req.body.message,
     user: req.body.user,
-    active: true
+    active: true,
+    time: date
   });
   myTicket
     .save()
@@ -77,11 +82,14 @@ router.get("/tickets/:id", (req, res) => {
 });
 
 router.post("/answer", (req, res) => {
+  let today = new Date();
+  let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
   let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
 
   let newAnswer = {
     username: req.session.currentUser.username,
-    message: message
+    message: message,
+    time: date
   };
 
   Ticket.updateOne({

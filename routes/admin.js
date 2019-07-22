@@ -9,6 +9,8 @@ var ObjectId = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+/********************
+1) USE and GET tickets */
 router.use("/admin", (req, res, next) => {
   if (req.session.currentUser.username === process.env.admin) {
     // <== if there's user in the session (user is logged in) go to the next step
@@ -21,16 +23,18 @@ router.use("/admin", (req, res, next) => {
 router.get("/admin", (req, res, next) => {
   Ticket.find().then(tickets => {
     res.render("admin/admin", { tickets: tickets });
-  });
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 });
 
 /********************
-3) GET admin tickets */
+3) GET specific ticket */
 router.get("/admin/tickets/:id", (req, res) => {
   Ticket.findById(req.params.id)
-    .then((ticket) => {
-      console.log("that's the ticket", ticket)
-      res.render("admin/adminTicket", {ticket: ticket});
+    .then(ticket => {
+      res.render("admin/adminTicket", { ticket: ticket });
     })
     .catch(err => {
       console.log(err);
@@ -40,21 +44,32 @@ router.get("/admin/tickets/:id", (req, res) => {
 /********************
 4) POST admin answer */
 router.post("/admin/answer", (req, res) => {
-  let { _id, message } = req.body // _id of the ticket (hidden input in userTicket.hbs)
-
+  let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
+  let today = new Date();
+  let date =
+    today.getFullYear() +
+    " " +
+    today.getDate() +
+    " " +
+    (today.getMonth() + 1) +
+    " | " +
+    today.getHours() +
+    ":" +
+    today.getMinutes();
   let newAnswer = {
     username: process.env.admin,
-    message: message
+    message: message,
+    time: date
   };
-  
+
   Ticket.updateOne(
     { _id: _id },
     { $push: { answers: newAnswer } },
     { new: true }
   )
     .then(() => {
-      console.log("this is req.body", req.body)
-      res.redirect("/admin")
+      console.log("this is req.body", req.body);
+      res.redirect("/admin");
     })
     .catch(err => {
       console.log(err);
@@ -63,17 +78,64 @@ router.post("/admin/answer", (req, res) => {
 
 /**************************
 5) POST status ticket false */
-router.post('/admin/active-false', (req, res) => {
+router.post("/admin/active-false", (req, res) => {
   Ticket.findOneAndUpdate(
-    {_id: ObjectId(req.body._id)},
-    {$set: {active: false}},
-    {new: true}
-  )  .then(()=> {
-    res.redirect("/admin")
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-})
+    { _id: ObjectId(req.body._id) },
+    { $set: { active: false } },
+    { new: true }
+  )
+    .then(() => {
+      res.redirect("/admin");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+/**************************
+6) POST status ticket true */
+router.post("/admin/active-true", (req, res) => {
+  Ticket.findOneAndUpdate(
+    { _id: ObjectId(req.body._id) },
+    { $set: { active: true } },
+    { new: true }
+  )
+    .then(() => {
+      res.redirect("/admin");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+/**************************
+6) GET filtered tickets by status */
+router.get("/admin/filter-by-status", (req, res) => {
+  Ticket.find({ active: true })
+    .then(activeTickets => {
+      console.log(activeTickets);
+      res.render("admin/activeTickets", { activeTickets: activeTickets });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+
+/**************************
+8) GET filtered tickets by author */
+router.get("/admin/filter-by-author/:author", (req, res) => {
+  Ticket.find({ author: req.params.author })
+    .then(ticketsByAuthor => {
+      
+      res.render("admin/ticketsByAuthor", { ticketsByAuthor:ticketsByAuthor })
+     
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+
 
 module.exports = router;

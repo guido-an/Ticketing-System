@@ -1,15 +1,17 @@
-my ticket 
+
 {{!-- values.[0] = user --}}
 {{!-- values.[1] = ticket --}}
 
 <h2>{{values.[1].title}}</h2>
 <hr>
 <strong>{{values.[0].username}}</strong><p>{{values.[1].message}}</p>
-
+<p>{{values.[1].time}}</p>
 <hr>
 {{#each values.[1].answers}}
- <strong>{{username}}</strong>
+ <strong>{{username}}</strong><span>{{time}}</span>
   <p>{{message}}</p> 
+
+
 {{/each}}
 <hr>
 
