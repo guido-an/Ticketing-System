@@ -3,6 +3,12 @@ const router = express.Router();
 const Ticket = require("../models/Ticket");
 const User = require("../models/User");
 var ObjectId = require("mongodb").ObjectID;
+const multer  = require('multer'); // middleware for sending image to the server
+const uploadCloud = require('../config/cloudinary');
+
+
+
+
 
 /******************************
 1) GET home  *********/
@@ -28,7 +34,41 @@ router.get("/submit", (req, res, next) => {
 
 /******************************
 3) POST submit  *********/
-router.post("/submit", (req, res) => {
+// const upload = multer({ dest: './public/uploads/' });
+
+// router.post("/submit",  upload.single('photo'), (req, res) => {
+//   console.log("this is the req", req)
+//   let today = new Date();
+//   let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
+
+//   let myTicket = new Ticket({
+//     author: req.session.currentUser.username,
+//     title: req.body.title,
+//     message: req.body.message,
+//     user: req.body.user,
+//     active: true,
+//     time: date,
+//     picture: {
+//       name: req.body.name,
+//       path: `/uploads/${req.file.filename}`,
+//       originalName: req.file.originalname
+//     }
+//   });
+//   myTicket
+//     .save()
+//     .then(() => {
+//       res.render("submit", { message: "ticket created succesfully" });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// });
+
+
+
+
+router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
+  console.log("this is the req", req)
   let today = new Date();
   let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
 
@@ -38,18 +78,27 @@ router.post("/submit", (req, res) => {
     message: req.body.message,
     user: req.body.user,
     active: true,
-    time: date
+    time: date,
+    picture: {
+      name: req.body.name,
+      //path: `/uploads/${req.file.filename}`,
+      path: req.file.url,
+      originalName: req.file.originalname
+    }
   });
   myTicket
     .save()
     .then(() => {
-      console.log("this is my ticket", myTicket);
+      console.log("this is my ticket", myTicket)
       res.render("submit", { message: "ticket created succesfully" });
     })
     .catch(err => {
       console.log(err);
     });
 });
+
+
+
 
 /******************************
 4) GET tickets  *********/

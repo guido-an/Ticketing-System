@@ -2,11 +2,12 @@
 </h1>
 <p>{{ticket.message}}</p> 
 <p>{{ticket.time}}</p>
-
+<img src="{{ ticket.picture.path }}" width="150px"></img>
 
 {{#each ticket.answers}}
  <strong>{{username}}</strong> <span>{{time}}</span>
   <p>{{message}}</p> 
+  
   
 {{/each}}
 <hr>

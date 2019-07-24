@@ -59,6 +59,7 @@ hbs.registerHelper('ifUndefined', (value, options) => {
       return options.fn(this);
   }
 });
+
   
 
 // default value for title local

@@ -1,13 +1,22 @@
 <h1>New ticket</h1>
-<p>{{user._id}}</p>
 
-<form action="/submit" method="POST" >
-User <input type="text" value={{user._id}} name="user">
-Title <input type="text" name="title">
-Message <input type="text" name="message">
+
+<form action="/submit" method="POST" enctype="multipart/form-data">
+  User <input type="text" value={{user._id}} name="user">
+  Title <input type="text" name="title">
+  Message <input type="text" name="message">
+  <input type="text" name="name">
+  <input type="file" name="photo">
+  <input type="submit" value="Create ticket">
+
+</form>
+{{!-- <h2>Upload your photo</h2>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="name">
+    <input type="file" name="photo">
+    <input type="submit" value="Save">
 
 <button type="submit">Create ticket</button>
-</form>
+</form> --}}
 <br>
 <p>{{message}}</p>
-

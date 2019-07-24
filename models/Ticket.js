@@ -11,7 +11,8 @@ const ticketSchema = new Schema(
     active: Boolean,
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     answers: Array,
-    time: String
+    time: String,
+    picture: Object
   },
   {
     timestamps: {
