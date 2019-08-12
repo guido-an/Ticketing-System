@@ -4,6 +4,8 @@ const router = express.Router();
 const User = require("../models/User");
 const Ticket = require("../models/Ticket");
 var ObjectId = require("mongodb").ObjectID;
+const multer  = require('multer'); // middleware for sending image to the server
+const uploadCloud = require('../config/cloudinary');
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -34,6 +36,7 @@ router.get("/admin", (req, res, next) => {
 router.get("/admin/tickets/:id", (req, res) => {
   Ticket.findById(req.params.id)
     .then(ticket => {
+      console.log("ticket", ticket)
       res.render("admin/adminTicket", { ticket: ticket });
     })
     .catch(err => {
@@ -43,7 +46,7 @@ router.get("/admin/tickets/:id", (req, res) => {
 
 /********************
 4) POST admin answer */
-router.post("/admin/answer", (req, res) => {
+router.post("/admin/answer", uploadCloud.single('photo'), (req, res) => {
   let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
   let today = new Date();
   let date =
@@ -59,7 +62,13 @@ router.post("/admin/answer", (req, res) => {
   let newAnswer = {
     username: process.env.admin,
     message: message,
-    time: date
+    time: date,
+    picture: {
+      name: req.body.name,
+      //path: `/uploads/${req.file.filename}`,
+      path: req.file.url,
+      originalName: req.file.originalname
+    }
   };
 
   Ticket.updateOne(
@@ -75,6 +84,7 @@ router.post("/admin/answer", (req, res) => {
       console.log(err);
     });
 });
+
 
 /**************************
 5) POST status ticket false */

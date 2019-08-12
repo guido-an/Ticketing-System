@@ -7,16 +7,28 @@
 {{#each ticket.answers}}
  <strong>{{username}}</strong> <span>{{time}}</span>
   <p>{{message}}</p> 
-  
-  
+
+  <img src="{{ picture.path }}" width="150px"></img>
+
 {{/each}}
 <hr>
 
-<form action="/admin/answer" method="POST">
+
+ <form action="/admin/answer" method="POST" enctype="multipart/form-data">
 answer
 <input hidden value={{ticket._id}} name="_id">
 
 <input type="text" name="message">
+<input type="file" name="photo">
 <button>Add answer</button>
-</form>
+</form> 
 
+{{!-- 
+<form action="/admin/answer" method="POST" enctype="multipart/form-data">
+  User <input type="text" value={{ticket._id}} name="user">
+  Title <input type="text" name="title">
+  Message <input type="text" name="message">
+  <input type="text" name="name">
+  <input type="file" name="photo">
+  <input type="submit" value="Create ticket">
+</form> --}}

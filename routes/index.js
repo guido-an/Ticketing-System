@@ -123,6 +123,7 @@ router.get("/tickets/:id", (req, res) => {
   const ticket = Ticket.findById(req.params.id);
   Promise.all([user, ticket])
     .then(values => {
+      console.log("values1", values[1])
       res.render("userTicket", { values: values });
     })
     .catch(err => {
@@ -130,26 +131,66 @@ router.get("/tickets/:id", (req, res) => {
     });
 });
 
-router.post("/answer", (req, res) => {
-  let today = new Date();
-  let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
-  let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
+// router.post("/answer", (req, res) => {
+//   let today = new Date();
+//   let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
+//   let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
 
+//   let newAnswer = {
+//     username: req.session.currentUser.username,
+//     message: message,
+//     time: date
+//   };
+
+//   Ticket.updateOne({
+//     _id: _id,
+//     $push: { answers: newAnswer },
+//     $set: { active: true },
+//     new: true
+//   })
+
+//     .then(() => {
+//       res.redirect("/auth/private");
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// });
+
+
+router.post("/answer", uploadCloud.single('photo'), (req, res) => {
+  let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
+  let today = new Date();
+  let date =
+    today.getFullYear() +
+    " " +
+    today.getDate() +
+    " " +
+    (today.getMonth() + 1) +
+    " | " +
+    today.getHours() +
+    ":" +
+    today.getMinutes();
   let newAnswer = {
     username: req.session.currentUser.username,
     message: message,
-    time: date
+    time: date,
+    picture: {
+      name: req.body.name,
+      //path: `/uploads/${req.file.filename}`,
+      path: req.file.url,
+      originalName: req.file.originalname
+    }
   };
 
-  Ticket.updateOne({
-    _id: _id,
-    $push: { answers: newAnswer },
-    $set: { active: true },
-    new: true
-  })
-
+  Ticket.updateOne(
+    { _id: _id },
+    { $push: { answers: newAnswer } },
+    { new: true }
+  )
     .then(() => {
-      res.redirect("/auth/private");
+      console.log("this is req.body", req.body);
+      res.redirect("/tickets");
     })
     .catch(err => {
       console.log(err);

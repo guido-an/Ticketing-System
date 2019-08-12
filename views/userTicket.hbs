@@ -13,18 +13,38 @@
 {{#each values.[1].answers}}
  <strong>{{username}}</strong><span>{{time}}</span>
   <p>{{message}}</p> 
+  <img src={{picture.path}} width="150px"/>
 
 {{/each}}
 <hr>
 
-
-<form action="/answer" method="POST">
+{{!-- <form action="/answer" method="POST">
 answer
 <input hidden value={{values.[1]._id}} name="_id">
 
 <input type="text" name="message">
 <button>Add answer</button>
+</form> --}}
+
+<form action="/answer" method="POST" enctype="multipart/form-data">
+answer
+<input hidden value={{values.[1]._id}} name="_id">
+
+<input type="text" name="message" placeholder="message">
+ <input type="text" name="name" placeholder="name photo">
+<input type="file" name="photo">
+<button>Add answer</button>
 </form>
+
+
+{{!-- <form action="/answer" method="POST" enctype="multipart/form-data">
+  User <input type="text" value={{user._id}} name="user">
+  Title <input type="text" name="title">
+  Message <input type="text" name="message">
+  <input type="text" name="name">
+  <input type="file" name="photo">
+  <input type="submit" value="Create ticket">
+</form> --}}
 
 
 
