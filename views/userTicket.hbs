@@ -1,55 +1,53 @@
-
 {{!-- values.[0] = user --}}
 {{!-- values.[1] = ticket --}}
+{{>headerUser}}
 
-<h2>{{values.[1].title}}</h2>
-<hr>
-<strong>{{values.[0].username}}</strong><p>{{values.[1].message}}</p>
-<p>{{values.[1].time}}</p>
-<img src="{{ values.[1].picture.path }}" width="150px"></img>
+<section class="container box-shadow user-ticket-page">
 
+  <h1 class="text-center">{{values.[1].title}}</h1>
+  <hr>
+  <div class="user-ticket-container">
+    <p><strong>{{values.[0].username}}</strong></p>
+    <span>{{values.[1].time}}</span>
+    <p>{{values.[1].message}}</p>
 
-<hr>
-{{#each values.[1].answers}}
- <strong>{{username}}</strong><span>{{time}}</span>
-  <p>{{message}}</p> 
-  <img src={{picture.path}} width="150px"/>
+    {{#if values.[1].picture.path}}
+    <a href="{{ values.[1].picture.path }}" download>
+      <img src="{{ values.[1].picture.path }}" width="150">
+    </a>
+    {{/if}}
 
-{{/each}}
-<hr>
+    <hr>
+    {{!-- ANSWERS --}}
+    {{#each values.[1].answers}}
+    <p><strong>{{username}}</strong></p><span>{{time}}</span>
+    <p>{{message}}</p>
 
-{{!-- <form action="/answer" method="POST">
-answer
-<input hidden value={{values.[1]._id}} name="_id">
+    {{#if picture.path}}
+     <a href="{{ picture.path }}" download>
+      <img src="{{ picture.path }}" width="150">
+    </a>
+    <p>{{picture.name}}</p>
+    {{/if}}
+    <hr>
 
-<input type="text" name="message">
-<button>Add answer</button>
-</form> --}}
+    {{/each}}
+  </div>
+  <hr>
 
-<form action="/answer" method="POST" enctype="multipart/form-data">
-answer
-<input hidden value={{values.[1]._id}} name="_id">
+{{!-- USER ANSWER --}}
+  <div class="user-answer">
+    <form action="/answer" method="POST" enctype="multipart/form-data">
+      <p class="text-center"><strong>Nuova risposta</strong></p>
+      <input class="user-id-input" hidden value={{values.[1]._id}} name="_id">
+      {{!-- <input type="text" name="message" placeholder="message"> --}}
+      <textarea name="message" placeholder="Messaggio*"></textarea>
+      <input type="text" name="name" placeholder="Nome file">
+      
+      <input type="file" name="photo">
+      <button class="btn btn-success">Add answer</button>
+    </form>
+  </div>
+</section>
 
-<input type="text" name="message" placeholder="message">
- <input type="text" name="name" placeholder="name photo">
-<input type="file" name="photo">
-<button>Add answer</button>
-</form>
-
-
-{{!-- <form action="/answer" method="POST" enctype="multipart/form-data">
-  User <input type="text" value={{user._id}} name="user">
-  Title <input type="text" name="title">
-  Message <input type="text" name="message">
-  <input type="text" name="name">
-  <input type="file" name="photo">
-  <input type="submit" value="Create ticket">
-</form> --}}
-
-
-
-
-
-
-
-
+{{> footerUser}}

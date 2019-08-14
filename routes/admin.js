@@ -4,8 +4,8 @@ const router = express.Router();
 const User = require("../models/User");
 const Ticket = require("../models/Ticket");
 var ObjectId = require("mongodb").ObjectID;
-const multer  = require('multer'); // middleware for sending image to the server
-const uploadCloud = require('../config/cloudinary');
+const multer = require("multer"); // middleware for sending image to the server
+const uploadCloud = require("../config/cloudinary");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -23,12 +23,13 @@ router.use("/admin", (req, res, next) => {
 });
 
 router.get("/admin", (req, res, next) => {
-  Ticket.find().then(tickets => {
-    res.render("admin/admin", { tickets: tickets });
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+  Ticket.find()
+    .then(tickets => {
+      res.render("admin/admin", { tickets: tickets });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 /********************
@@ -36,7 +37,7 @@ router.get("/admin", (req, res, next) => {
 router.get("/admin/tickets/:id", (req, res) => {
   Ticket.findById(req.params.id)
     .then(ticket => {
-      console.log("ticket", ticket)
+      console.log("ticket", ticket);
       res.render("admin/adminTicket", { ticket: ticket });
     })
     .catch(err => {
@@ -46,19 +47,25 @@ router.get("/admin/tickets/:id", (req, res) => {
 
 /********************
 4) POST admin answer */
-router.post("/admin/answer", uploadCloud.single('photo'), (req, res) => {
+router.post("/admin/answer", uploadCloud.single("photo"), (req, res) => {
   let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
   let today = new Date();
   let date =
+    today.getDate() +
+    "-" +
+    (today.getMonth() + 1) +
+    "-" +
     today.getFullYear() +
     " " +
-    today.getDate() +
-    " " +
-    (today.getMonth() + 1) +
     " | " +
     today.getHours() +
     ":" +
     today.getMinutes();
+
+  if (req.file == undefined) {
+    req.file = "";
+  }
+
   let newAnswer = {
     username: process.env.admin,
     message: message,
@@ -84,7 +91,6 @@ router.post("/admin/answer", uploadCloud.single('photo'), (req, res) => {
       console.log(err);
     });
 });
-
 
 /**************************
 5) POST status ticket false */
@@ -131,21 +137,16 @@ router.get("/admin/filter-by-status", (req, res) => {
     });
 });
 
-
 /**************************
 8) GET filtered tickets by author */
 router.get("/admin/filter-by-author/:author", (req, res) => {
   Ticket.find({ author: req.params.author })
     .then(ticketsByAuthor => {
-      
-      res.render("admin/ticketsByAuthor", { ticketsByAuthor:ticketsByAuthor })
-     
+      res.render("admin/ticketsByAuthor", { ticketsByAuthor: ticketsByAuthor });
     })
     .catch(err => {
       console.log(err);
     });
 });
-
-
 
 module.exports = router;

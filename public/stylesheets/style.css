@@ -1,8 +1,189 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font-family: "Nunito" !important;
+  position: relative;
+  min-height: 100vh; }
+
+p {
+  font-size: 16px !important; }
+
+li {
+  list-style: none; }
 
 a {
-  color: #00B7FF; }
+  font-size: 16px !important; }
+
+a:hover {
+  text-decoration: none !important; }
+
+input {
+  padding: 10px 20px;
+  border-top: none;
+  border-right: none;
+  border-left: none; }
+
+h1 {
+  font-weight: 700 !important; }
+
+h3 {
+  font-weight: 600 !important;
+  font-size: 22px !important; }
+
+.box-shadow {
+  box-shadow: 0px 1px 2px rgba(46, 41, 51, 0.08), 0px 2px 4px rgba(71, 63, 79, 0.08);
+  margin-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 60px; }
+
+/** header user **/
+.header-user {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px; }
+
+.header-user ul {
+  position: relative;
+  top: 20px;
+  left: 10px; }
+
+.header-user li {
+  display: inline-block;
+  margin: 10px; }
+
+.header-user ul li a {
+  font-size: 16px; }
+
+.header-user ul li:nth-child(3) {
+  position: relative;
+  left: 60px; }
+
+.logout-link {
+  color: #777 !important;
+  border: 2px solid #777;
+  padding: 6px 15px;
+  border-radius: 4px; }
+
+.logout-link:hover {
+  color: #222 !important;
+  border: 2px solid #222; }
+
+/** footer user **/
+.footer {
+  position: absolute;
+  bottom: -120px;
+  background-color: #fafafa;
+  width: 100%;
+  height: 60px; }
+
+/** LOGIN section **/
+.login-section h1 {
+  margin-top: 40px;
+  margin-bottom: 60px; }
+
+.login-section input {
+  margin: 0 auto;
+  display: block;
+  width: 300px;
+  margin-bottom: 20px;
+  height: 40px; }
+
+.login-section button {
+  margin: 0 auto;
+  display: block;
+  margin-top: 40px; }
+
+/** private and tickets **/
+.tickets-page table {
+  margin-top: 40px;
+  border-radius: 4px; }
+
+.tickets-page td,
+th {
+  border: 1px solid #fafafa;
+  border-right: none;
+  border-left: none;
+  text-align: left;
+  padding: 8px !important;
+  width: 30%; }
+
+.tickets-page .view-ticket {
+  position: relative;
+  right: 20px; }
+
+.tickets-page h3 {
+  position: relative;
+  bottom: 5px; }
+
+.date-tickets-table {
+  font-size: 14px !important;
+  color: #777; }
+
+/** submit page **/
+.submit-form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 40px; }
+
+.submit-form-container input {
+  display: block;
+  width: 500px;
+  margin: 10px; }
+
+.submit-form-container textarea {
+  width: 500px;
+  margin: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #fafafa; }
+
+.submit-form-container .user-input {
+  display: none !important; }
+
+.submit-form-container .user-message {
+  padding-bottom: 200px; }
+
+.submit-form-container .user-message::placeholder {
+  display: none; }
+
+.ticket-created-msg {
+  color: green;
+  margin-top: 40px; }
+
+/** user ticket page **/
+.user-ticket-page {
+  padding: 20px 40px; }
+
+.user-ticket-container,
+.user-answer {
+  width: 80%;
+  margin: 0 auto; }
+
+.user-ticket-container span {
+  color: #777; }
+
+.user-ticket-container p {
+  color: #222;
+  margin-top: 20px; }
+
+.user-answer input {
+  display: block;
+  margin: 10px auto;
+  width: 500px; }
+
+.user-answer textarea {
+  width: 500px;
+  margin: 0 auto;
+  display: block;
+  height: 200px;
+  margin-bottom: 10px; }
+
+.user-id-input {
+  display: none !important; }
+
+.user-answer button {
+  margin: 0 auto;
+  display: block;
+  margin-top: 20px; }
 
 /*# sourceMappingURL=style.css.map */

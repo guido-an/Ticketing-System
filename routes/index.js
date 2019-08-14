@@ -8,8 +8,6 @@ const uploadCloud = require('../config/cloudinary');
 
 
 
-
-
 /******************************
 1) GET home  *********/
 router.get("/", (req, res, next) => {
@@ -34,44 +32,14 @@ router.get("/submit", (req, res, next) => {
 
 /******************************
 3) POST submit  *********/
-// const upload = multer({ dest: './public/uploads/' });
-
-// router.post("/submit",  upload.single('photo'), (req, res) => {
-//   console.log("this is the req", req)
-//   let today = new Date();
-//   let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
-
-//   let myTicket = new Ticket({
-//     author: req.session.currentUser.username,
-//     title: req.body.title,
-//     message: req.body.message,
-//     user: req.body.user,
-//     active: true,
-//     time: date,
-//     picture: {
-//       name: req.body.name,
-//       path: `/uploads/${req.file.filename}`,
-//       originalName: req.file.originalname
-//     }
-//   });
-//   myTicket
-//     .save()
-//     .then(() => {
-//       res.render("submit", { message: "ticket created succesfully" });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
-
-
-
-
 router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
-  console.log("this is the req", req)
-  let today = new Date();
-  let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
 
+  let today = new Date();
+  let date = today.getDate() + '-'+(today.getMonth()+1) + "-" + today.getFullYear()+ ' ' + " | " +  today.getHours() + ":" + today.getMinutes() ;
+
+  if(req.file == undefined){
+    req.file = ""
+  }
   let myTicket = new Ticket({
     author: req.session.currentUser.username,
     title: req.body.title,
@@ -89,8 +57,8 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
   myTicket
     .save()
     .then(() => {
-      console.log("this is my ticket", myTicket)
-      res.render("submit", { message: "ticket created succesfully" });
+      console.log("req.file", req.file)
+      res.render("submit", { message: " " });
     })
     .catch(err => {
       console.log(err);
@@ -104,7 +72,7 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
 4) GET tickets  *********/
 router.get("/tickets", (req, res) => {
   if (req.session.currentUser) {
-    Ticket.find({ user: ObjectId(req.session.currentUser._id) })
+    Ticket.find({ user: ObjectId(req.session.currentUser._id) }).sort({ created_at: -1 })
       .then(tickets => {
         res.render("tickets", { tickets: tickets });
       })
@@ -116,6 +84,7 @@ router.get("/tickets", (req, res) => {
   }
 });
 
+
 /******************************
 5) GET tickets details  *********/
 router.get("/tickets/:id", (req, res) => {
@@ -123,7 +92,7 @@ router.get("/tickets/:id", (req, res) => {
   const ticket = Ticket.findById(req.params.id);
   Promise.all([user, ticket])
     .then(values => {
-      console.log("values1", values[1])
+      console.log("values1", values[1].picture)
       res.render("userTicket", { values: values });
     })
     .catch(err => {
@@ -131,31 +100,6 @@ router.get("/tickets/:id", (req, res) => {
     });
 });
 
-// router.post("/answer", (req, res) => {
-//   let today = new Date();
-//   let date = today.getFullYear()+ ' ' + today.getDate() + ' '+(today.getMonth()+1) + " | " +  today.getHours() + ":" + today.getMinutes() ;
-//   let { _id, message } = req.body; // _id of the ticket (hidden input in userTicket.hbs)
-
-//   let newAnswer = {
-//     username: req.session.currentUser.username,
-//     message: message,
-//     time: date
-//   };
-
-//   Ticket.updateOne({
-//     _id: _id,
-//     $push: { answers: newAnswer },
-//     $set: { active: true },
-//     new: true
-//   })
-
-//     .then(() => {
-//       res.redirect("/auth/private");
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
 
 
 router.post("/answer", uploadCloud.single('photo'), (req, res) => {
@@ -171,6 +115,11 @@ router.post("/answer", uploadCloud.single('photo'), (req, res) => {
     today.getHours() +
     ":" +
     today.getMinutes();
+
+    if(req.file == undefined){
+      req.file = ""
+    }
+
   let newAnswer = {
     username: req.session.currentUser.username,
     message: message,

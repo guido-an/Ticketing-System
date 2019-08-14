@@ -1,7 +1,40 @@
-My tickets
-{{#each tickets}}
-  <h2>{{title}}</h2>
-  <a href=/tickets/{{id}}>View ticket</a>
-{{/each}}
+{{> headerUser}}
 
 
+<section class="tickets-page container box-shadow">
+
+  <h1 class="text-center">MY TICKETS</h1>
+
+  <table>
+    <thead>
+      <th>Titolo</th>
+      <th>Data</th>
+      <th>Stato</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each tickets}}
+      <div class="private-container">
+        <tr>
+          <td> <a href="/tickets/{{id}}">
+              <h3>{{title}}</h3>
+            </a></td>
+          <td>
+            <p class="date-tickets-table">{{time}}</p>
+          </td>
+          <td> {{#if active}}
+            <p class="text-success">Aperto</p>
+            {{else}}
+            <p class="text-danger">Chiuso</p>
+            {{/if}}</td>
+          <td><a class="view-ticket btn btn-primary" href="/tickets/{{id}}">View ticket</a> </td>
+        </tr>
+      </div>
+      {{/each}}
+    </tbody>
+  </table>
+
+
+</section>
+
+{{>footerUser}}

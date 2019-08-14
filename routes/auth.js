@@ -42,14 +42,6 @@ router.post("/login", (req, res) => {
 
 /******************************
 1) USE and GET private  *********/
-// router.use('/private', (req, res, next) => {
-//   if (req.session.currentUser) { // <== if there's user in the session (user is logged in) go to the next step
-//     next();
-//   }
-//   else {
-//     res.redirect("login");
-//   }
-// });
 router.use("/private", (req, res, next) => {
   // change this line of code with .env in production!!!!
   if (req.session.currentUser.username === process.env.admin) { // if the user is the admin go to admin page - 
@@ -63,11 +55,13 @@ router.use("/private", (req, res, next) => {
 
 router.get("/private", (req, res, next) => {
   const user = User.findOne({ username: req.session.currentUser.username });
-  const tickets = Ticket.find({ user: ObjectId(req.session.currentUser._id) });
+  const tickets = Ticket.find({ user: ObjectId(req.session.currentUser._id)}).sort( { created_at: -1 });
 
   Promise.all([user, tickets])
     .then(values => {
-      res.render("auth/private", { values: values });
+      console.log(values[1])
+      // res.render("auth/private", { values: values });
+      res.redirect("/tickets")
     })
     .catch(err => {
       console.log(err);

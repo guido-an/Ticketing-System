@@ -1,10 +1,11 @@
-private page
 
 
-<h1>Hello {{values.[0].username}}</h1>
+{{> headerUser}}
 
-{{#each values.[1]}}
-  <h2>{{title}}</h2>
-  <a href="/tickets/{{id}}">View ticket</a>
-{{/each}}
+<section class="tickets-page container">
 
+  <h1 class="text-center">Ciao {{values.[0].username}} :)</h1>
+  <a href="/tickets" class="text-center">View my tickets</a>
+
+
+</section>
