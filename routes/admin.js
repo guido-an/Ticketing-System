@@ -25,6 +25,7 @@ router.use("/admin", (req, res, next) => {
 router.get("/admin", (req, res, next) => {
   Ticket.find()
     .then(tickets => {
+      console.log(tickets)
       res.render("admin/admin", { tickets: tickets });
     })
     .catch(err => {
@@ -34,7 +35,7 @@ router.get("/admin", (req, res, next) => {
 
 /********************
 3) GET specific ticket */
-router.get("/admin/tickets/:id", (req, res) => {
+router.get("/admin/ticket/:id", (req, res) => {
   Ticket.findById(req.params.id)
     .then(ticket => {
       console.log("ticket", ticket);
@@ -65,6 +66,7 @@ router.post("/admin/answer", uploadCloud.single("photo"), (req, res) => {
   if (req.file == undefined) {
     req.file = "";
   }
+  
 
   let newAnswer = {
     username: process.env.admin,
@@ -139,14 +141,14 @@ router.get("/admin/filter-by-status", (req, res) => {
 
 /**************************
 8) GET filtered tickets by author */
-router.get("/admin/filter-by-author/:author", (req, res) => {
-  Ticket.find({ author: req.params.author })
-    .then(ticketsByAuthor => {
-      res.render("admin/ticketsByAuthor", { ticketsByAuthor: ticketsByAuthor });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
+// router.get("/admin/filter-by-author/:author", (req, res) => {
+//   Ticket.find({ author: req.params.author })
+//     .then(ticketsByAuthor => {
+//       res.render("admin/ticketsByAuthor", { ticketsByAuthor: ticketsByAuthor });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// });
 
 module.exports = router;

@@ -1,6 +1,14 @@
-active tickets 
+{{> headerAdmin}}
+<section class="container">
 
+
+{{#if activeTickets}}
 {{#each activeTickets}}
   <h1>{{title}}</h1>
-  <a href=/admin/tickets/{{id}}>View ticket</a>
+  <a href=/admin/ticket/{{id}}>View ticket</a>
 {{/each}}
+{{else}}
+<h1 class="text-center">ALRIGHT :)</h1>
+{{/if}}
+
+</section>

@@ -1,34 +1,49 @@
-<h1>{{ticket.title}}
-</h1>
-<p>{{ticket.message}}</p> 
-<p>{{ticket.time}}</p>
-<img src="{{ ticket.picture.path }}" width="150px"></img>
+{{> headerAdmin}}
 
-{{#each ticket.answers}}
- <strong>{{username}}</strong> <span>{{time}}</span>
-  <p>{{message}}</p> 
+<section class="container box-shadow user-ticket-page">
+  <h1 class="text-center">{{ticket.title}}</h1>
+  <hr>
+  <div class="user-ticket-container">
+    <p><strong>{{values.[0].username}}</strong></p>
+    <span>{{ticket.time}}</span>
+    <p>{{ticket.message}}</p>
 
-  <img src="{{ picture.path }}" width="150px"></img>
+    {{#if ticket.picture.path}}
+    <a href="{{ ticket.picture.path }}" download>
+      <img src="{{ ticket.picture.path }}" width="150">
+    </a>
+    {{/if}}
 
-{{/each}}
-<hr>
+    <hr>
+    {{!-- ANSWERS --}}
+    {{#each ticket.answers}}
+    <p><strong>{{username}}</strong></p><span>{{time}}</span>
+    <p>{{message}}</p>
+
+    {{#if picture.path}}
+     <a href="{{ picture.path }}" download>
+      <img src="{{ picture.path }}" width="150">
+    </a>
+    <p>{{picture.name}}</p>
+    {{/if}}
+    <hr>
+
+    {{/each}}
+  </div>
+  <hr>
 
 
- <form action="/admin/answer" method="POST" enctype="multipart/form-data">
-answer
-<input hidden value={{ticket._id}} name="_id">
-
-<input type="text" name="message">
-<input type="file" name="photo">
-<button>Add answer</button>
-</form> 
-
-{{!-- 
-<form action="/admin/answer" method="POST" enctype="multipart/form-data">
-  User <input type="text" value={{ticket._id}} name="user">
-  Title <input type="text" name="title">
-  Message <input type="text" name="message">
-  <input type="text" name="name">
-  <input type="file" name="photo">
-  <input type="submit" value="Create ticket">
-</form> --}}
+{{!-- USER ANSWER --}}
+  <div class="user-answer">
+    <form action="/admin/answer" method="POST" enctype="multipart/form-data">
+      <p class="text-center"><strong>Nuova risposta</strong></p>
+      <input class="user-id-input" hidden value={{ticket._id}} name="_id">
+      {{!-- <input type="text" name="message" placeholder="message"> --}}
+      <textarea name="message" placeholder="Messaggio*"></textarea>
+      <input type="text" name="name" placeholder="Nome file">
+      
+      <input type="file" name="photo">
+      <button class="btn btn-success">Add answer</button>
+    </form>
+  </div>
+</section>

@@ -186,4 +186,9 @@ th {
   display: block;
   margin-top: 20px; }
 
+/** admin page **/
+.admin-page h3 {
+  position: relative;
+  bottom: 5px; }
+
 /*# sourceMappingURL=style.css.map */
