@@ -15,23 +15,6 @@ const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
     
 
-// mongoose
-//   .connect('mongodb://localhost/ticket-system', {useNewUrlParser: true})
-//   .then(x => {
-//     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-//   })
-//   .catch(err => {
-//     console.error('Error connecting to mongo', err)
-//   });
-// mongoose
-//   .connect('mongodb://carucciguido:Mongo2019!@backenddb-shard-00-00-4fty3.mongodb.net:27017,backenddb-shard-00-01-4fty3.mongodb.net:27017,backenddb-shard-00-02-4fty3.mongodb.net:27017/ticketsystem?ssl=true&replicaSet=backendDB-shard-0&authSource=admin&retryWrites=true&w=majority', {useNewUrlParser: true})
-//   .then(x => {
-//     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-//   })
-//   .catch(err => {
-//     console.error('Error connecting to mongo', err)
-//   });
-
 mongoose
   .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
