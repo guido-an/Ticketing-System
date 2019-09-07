@@ -33,7 +33,7 @@ const flash      = require("connect-flash");
 //   });
 
 mongoose
-  .connect("mongodb+srv://carucciguido:Mongo2019!@backenddb-4fty3.mongodb.net/ticketsystem?retryWrites=true&w=majority", {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
