@@ -1,0 +1,65 @@
+{{>headerAdmin}}
+
+<section class="container box-shadow admin-page">
+  <form action="/admin/filter-by-status" method="GET">
+    <button class="btn" type="submit">Ticket aperti</button>
+  </form>
+  <h1 class="text-center">Admin tickets</h1>
+
+  <table>
+    <thead>
+      <th>Titolo</th>
+      <th>Data</th>
+    
+      <th>Stato</th>
+      <th>Cambia stato</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each tickets}}
+      <div class="private-container">
+        <tr>
+          <td> <a href="/admin/ticket/{{id}}">
+              <h3>{{title}}</h3>
+            </a></td>
+          <td>
+            
+            <p class="date-tickets-table">{{time}} - <strong>{{author}}</strong></p>
+          </td>
+          <td> {{#if active}}
+            <p class="text-success">Aperto</p>
+            {{else}}
+            <p class="text-danger">Chiuso</p>
+            {{/if}}</td>
+          {{!-- <td><a class="view-ticket btn btn-primary" href="admin/tickets/{{id}}">View ticket</a> </td> --}}
+          <td>{{#if active}}
+            <form action="/admin/active-false" method="POST">
+              <input hidden type="text" value={{_id}} name="_id">
+              <button class="btn btn-danger" type="submit">Chiudi ticket</button>
+            </form>
+            {{else}}
+            <form action="/admin/active-true" method="POST">
+              <input hidden type="text" value={{_id}} name="_id">
+              <button class="btn btn-success" type="submit">Apri ticket</button>
+            </form>
+            {{/if}}</td>
+           
+        </tr>
+      </div>
+      {{/each}}
+    </tbody>
+  </table>
+
+
+</section>
+
+
+{{!-- <h2>tickets by author</h2>
+      <ul>
+        {{#each tickets}}
+        <li><a href="/admin/filter-by-author/{{author}}">{{author}} tickets</a> </li>
+        {{/each}}
+      </ul> --}}
+
+
+      
