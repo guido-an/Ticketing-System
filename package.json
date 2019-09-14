@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "dev": "DEBUG=ticket-system:* nodemon ./bin/www",
-    "dev-windows": "nodemon ./bin/www"
+    "dev-windows": "node ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^3.0.0",
