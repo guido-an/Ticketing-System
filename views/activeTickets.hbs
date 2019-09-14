@@ -1,12 +1,9 @@
 {{> headerUser}}
+<section class="container" id="active-tickets-user">
 
-{{#if tickets}}
+  <h1 class="text-center">Tickets Aperti</h1>
 
-<section class="tickets-page container box-shadow">
-<form action="/active-tickets" method="GET">
-    <button class="btn" type="submit">Tickets aperti</button>
-  </form>
-  <h1 class="text-center">{{user.username}}'s  tickets</h1>
+  {{#if activeTickets}}
 
   <table>
     <thead>
@@ -16,7 +13,7 @@
       <th></th>
     </thead>
     <tbody>
-      {{#each tickets}}
+      {{#each activeTickets}}
       <div class="private-container">
         <tr>
           <td> <a href="/tickets/{{id}}">
@@ -36,16 +33,7 @@
       {{/each}}
     </tbody>
   </table>
-
-
-</section>
-
-{{>footerUser}}
-
-{{else}}
-<div class="container text-center">
-  <p>Ciao <strong>{{user.username}}</strong>, non c'è ancora nessun ticket aperto. <a href="/submit">Apri il pirmo ticket</a></p>
-</div>
-{{/if}}
-
-{{!-- {{log this}} --}}
+  {{else}}
+<p>Non ci sono tickets aperti!</p>
+  {{/if}}
+  </section>

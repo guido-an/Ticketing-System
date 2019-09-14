@@ -72,7 +72,8 @@ router.get("/tickets", (req, res) => {
   if (req.session.currentUser) {
     Ticket.find({ user: ObjectId(req.session.currentUser._id) }).sort({ created_at: -1 })
       .then(tickets => {
-        res.render("tickets", { tickets: tickets });
+        res.render("tickets", { tickets: tickets, user: req.session.currentUser });
+        console.log("from server", req.session.currentUser)
       })
       .catch(err => {
         console.log(err);
@@ -132,12 +133,28 @@ router.post("/answer", uploadCloud.single('photo'), (req, res) => {
 
   Ticket.updateOne(
     { _id: _id },
-    { $push: { answers: newAnswer } },
+    { $push: { answers: newAnswer }, active: true },
     { new: true }
   )
     .then(() => {
       console.log("this is req.body", req.body);
       res.redirect("/tickets");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+
+/**************************
+6) GET active tickets */
+router.get("/active-tickets", (req, res) => {
+  console.log("req.session.username", req.session.currentUser.username)
+  
+  Ticket.find({ author: req.session.currentUser.username, active: true } )
+    .then(activeTickets => {
+      console.log("active tickets", activeTickets);
+      res.render("activeTickets", { activeTickets: activeTickets });
     })
     .catch(err => {
       console.log(err);

@@ -1,21 +1,3 @@
 {{> headerUser}}
-<section class="login-section container">
-<h1 class="text-center">Welcome! </h1>
-<form action="/auth/login" method="POST" id="form-container">
-  <p class="text-center"><strong>Username</strong></p>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
-
-<p class="text-center"><strong>Password</strong></p>
-  <input id="password" type="password" name="password" placeholder="Your password">
-
-  {{#if message }}
-    <div class="error-message">{{ message }}</div>
-  {{/if}}
-
-
-  <button class="btn btn-success">Login</button>
-
-
-</form>
-</section>
+  {{> loginPage}}
 {{> footerUser}}

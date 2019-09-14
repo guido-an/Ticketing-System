@@ -191,4 +191,11 @@ th {
   position: relative;
   bottom: 5px; }
 
+/** active tickets user page **/
+#active-tickets-user {
+  margin-top: 80px; }
+
+#active-tickets-user h1 {
+  margin-bottom: 40px; }
+
 /*# sourceMappingURL=style.css.map */

@@ -63,15 +63,18 @@ hbs.registerHelper('ifUndefined', (value, options) => {
 });
 
 
-  fs = require('fs')
-  headerUser = fs.readFileSync(__dirname + '/views/headerUser.hbs', 'utf8');
-  footerUser = fs.readFileSync(__dirname + '/views/footerUser.hbs', 'utf8');
-  headerAdmin = fs.readFileSync(__dirname + '/views/admin/headerAdmin.hbs', 'utf8');
+//register partial views
+hbs.registerPartials(__dirname + "/views/partials");
+
+  // fs = require('fs')
+  // headerUser = fs.readFileSync(__dirname + '/views/headerUser.hbs', 'utf8');
+  // footerUser = fs.readFileSync(__dirname + '/views/footerUser.hbs', 'utf8');
+  // headerAdmin = fs.readFileSync(__dirname + '/views/admin/headerAdmin.hbs', 'utf8');
 
 
-  hbs.registerPartial('headerUser', headerUser); 
-  hbs.registerPartial('footerUser', footerUser); 
-  hbs.registerPartial('headerAdmin', headerAdmin); 
+  // hbs.registerPartial('headerUser', headerUser); 
+  // hbs.registerPartial('footerUser', footerUser); 
+  // hbs.registerPartial('headerAdmin', headerAdmin); 
 
 
   
