@@ -102,6 +102,7 @@ h3{
 }
 
 /** private and tickets **/
+
 .tickets-page table{
   margin-top: 40px;
   border-radius:4px
@@ -127,6 +128,9 @@ th {
 .date-tickets-table{
   font-size:14px !important;
   color: #777;
+}
+.no-ticket-open{
+  margin-top: 80px
 }
 
 /** submit page **/
