@@ -9,12 +9,14 @@ var ObjectId = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+/******************************
+1) GET login  *********/
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { message: req.flash("error") });
 });
 
 /******************************
-1) POST login  *********/
+2) POST login  *********/
 router.post("/login", (req, res) => {
   let currentUser;
   User.findOne({ username: req.body.username })
@@ -41,7 +43,7 @@ router.post("/login", (req, res) => {
 });
 
 /******************************
-1) USE and GET private  *********/
+3) USE and GET private  *********/
 router.use("/private", (req, res, next) => {
   // change this line of code with .env in production!!!!
   if (req.session.currentUser.username === process.env.admin) { // if the user is the admin go to admin page - 
@@ -69,16 +71,17 @@ router.get("/private", (req, res, next) => {
 });
 
 /******************************
-3) GET signup  *********/
+4) GET signup  *********/
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
 /******************************
-4) POST signup  *********/
+5) POST signup  *********/
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
@@ -95,7 +98,8 @@ router.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
+      email
     });
 
     newUser
@@ -109,6 +113,8 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+/******************************
+6) GET logout  *********/
 router.get("/logout", (req, res) => {
   req.session.destroy(err => {
     res.redirect("login");

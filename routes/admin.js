@@ -25,7 +25,6 @@ router.use("/admin", (req, res, next) => {
 router.get("/admin", (req, res, next) => {
   Ticket.find()
     .then(tickets => {
-      console.log(tickets)
       res.render("admin/admin", { tickets: tickets });
     })
     .catch(err => {

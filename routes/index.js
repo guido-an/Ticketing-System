@@ -49,7 +49,6 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
     time: date,
     picture: {
       name: req.body.name,
-      //path: `/uploads/${req.file.filename}`,
       path: req.file.url,
       originalName: req.file.originalname
     }
@@ -57,8 +56,7 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
   myTicket
     .save()
     .then(() => {
-      console.log("req.file", req.file)
-      res.render("submit", { message: " " });
+      res.redirect("/tickets");
     })
     .catch(err => {
       console.log(err);
