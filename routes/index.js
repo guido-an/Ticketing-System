@@ -26,7 +26,6 @@ router.use("/submit", (req, res, next) => {
 });
 
 router.get("/submit", (req, res, next) => {
-  console.log("from /submit", req.session.currentUser);
   res.render("submit", { user: req.session.currentUser });
 });
 

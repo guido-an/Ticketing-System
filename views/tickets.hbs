@@ -2,7 +2,7 @@
 
 {{#if tickets}}
 
-<section class="tickets-page container box-shadow">
+<section id="dtBasicExample" class="tickets-page container box-shadow">
 <form action="/active-tickets" method="GET">
     <button class="btn" type="submit">Tickets aperti</button>
   </form>
@@ -10,7 +10,7 @@
 
   <table>
     <thead>
-      <th>Titolo</th>
+      <th class="th-sm">Titolo</th>
       <th>Data</th>
       <th>Stato</th>
       <th></th>
@@ -49,5 +49,3 @@
 {{>footerUser}}
 
 
-
-{{!-- {{log this}} --}}

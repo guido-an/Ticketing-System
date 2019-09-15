@@ -1,4 +1,7 @@
 
 {{>headerUser}}
  {{> loginPage}}
+{{#if errorMessage}}
+ <p class="text-center" style="margin-top:40px">{{errorMessage}}</p>
+ {{/if}}
 {{> footerUser}}
