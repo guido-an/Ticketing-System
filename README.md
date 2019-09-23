@@ -1,7 +1,7 @@
 # Ticketing System
 http://support.vanillamarketing.it/
 
-An internal ticketing system application for managing new customers' requests. <br>
+An internal ticketing system application for managing new customers' requests. <br><br>
 Built with Node, Express, Mongo and Handlebars.
 
 
