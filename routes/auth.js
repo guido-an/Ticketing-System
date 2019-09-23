@@ -61,9 +61,7 @@ router.get("/private", (req, res, next) => {
 
   Promise.all([user, tickets])
     .then(values => {
-      console.log(values[1])
-      // res.render("auth/private", { values: values });
-      res.redirect("/tickets")
+        res.redirect("/tickets")
     })
     .catch(err => {
       console.log(err);

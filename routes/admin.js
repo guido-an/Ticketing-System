@@ -37,7 +37,7 @@ router.get("/admin", (req, res, next) => {
 router.get("/admin/ticket/:id", (req, res) => {
   Ticket.findById(req.params.id)
     .then(ticket => {
-      console.log("ticket", ticket);
+    
       res.render("admin/adminTicket", { ticket: ticket });
     })
     .catch(err => {
@@ -85,7 +85,6 @@ router.post("/admin/answer", uploadCloud.single("photo"), (req, res) => {
     { new: true }
   )
     .then(() => {
-      console.log("this is req.body", req.body);
       res.redirect("/admin");
     })
     .catch(err => {
@@ -130,7 +129,7 @@ router.post("/admin/active-true", (req, res) => {
 router.get("/admin/filter-by-status", (req, res) => {
   Ticket.find({ active: true })
     .then(activeTickets => {
-      console.log(activeTickets);
+      
       res.render("admin/activeTickets", { activeTickets: activeTickets });
     })
     .catch(err => {

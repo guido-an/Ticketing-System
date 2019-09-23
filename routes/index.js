@@ -5,6 +5,7 @@ const User = require("../models/User");
 var ObjectId = require("mongodb").ObjectID;
 const multer  = require('multer'); // middleware for sending image to the server
 const uploadCloud = require('../config/cloudinary');
+const nodemailer = require("nodemailer");
 
 
 
@@ -30,9 +31,40 @@ router.get("/submit", (req, res, next) => {
 });
 
 /******************************
-3) POST submit  *********/
+3) POST submit - Create new ticket *********/
 router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
 
+  /* nodemailer */ 
+  let transporter = nodemailer.createTransport({
+    host: "hostingssd12.netsons.net",
+    port: 465,
+    secure: true, // use TLS
+    auth: {
+      user: process.env.NODEMAILER_EMAIL,
+      pass: process.env.NODEMAILER_PSW
+    },
+    debug: true, // show debug output
+    logger: true // log information in console
+  });
+
+  transporter.sendMail({
+    // email to the ADMIN
+    from: process.env.NODEMAILER_EMAIL,
+    to: process.env.ADMIN_EMAIL,
+    subject: `Nuovo ticket| ${req.body.title}`,
+    text: req.body.message,
+    html: req.body.message + '<br><br><a href="http://support.vanillamarketing.it/admin">Ticket</a>'
+  })
+
+  // transporter.verify(function(error, success) {
+  //   if (error) {
+  //     console.log('error', error);
+  //   } else {
+  //     console.log("Server is ready to take our messages");
+  //   }
+  // });
+
+  /* new ticket */
   let today = new Date();
   let date = today.getDate() + '-'+(today.getMonth()+1) + "-" + today.getFullYear()+ ' ' + " | " +  today.getHours() + ":" + today.getMinutes() ;
 
@@ -72,7 +104,7 @@ router.get("/tickets", (req, res) => {
     Ticket.find({ user: ObjectId(req.session.currentUser._id) }).sort({ created_at: -1 })
       .then(tickets => {
         res.render("tickets", { tickets: tickets, user: req.session.currentUser });
-        console.log("from server", req.session.currentUser)
+        
       })
       .catch(err => {
         console.log(err);
@@ -90,7 +122,6 @@ router.get("/tickets/:id", (req, res) => {
   const ticket = Ticket.findById(req.params.id);
   Promise.all([user, ticket])
     .then(values => {
-      console.log("values1", values[1].picture)
       res.render("userTicket", { values: values });
     })
     .catch(err => {
@@ -136,7 +167,6 @@ router.post("/answer", uploadCloud.single('photo'), (req, res) => {
     { new: true }
   )
     .then(() => {
-      console.log("this is req.body", req.body);
       res.redirect("/tickets");
     })
     .catch(err => {
@@ -148,11 +178,9 @@ router.post("/answer", uploadCloud.single('photo'), (req, res) => {
 /**************************
 6) GET active tickets */
 router.get("/active-tickets", (req, res) => {
-  console.log("req.session.username", req.session.currentUser.username)
   
   Ticket.find({ author: req.session.currentUser.username, active: true } )
     .then(activeTickets => {
-      console.log("active tickets", activeTickets);
       res.render("activeTickets", { activeTickets: activeTickets });
     })
     .catch(err => {
