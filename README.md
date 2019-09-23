@@ -29,5 +29,6 @@ NODEMAILER_PSW=[nodemailer_psw]
 <br>
 <li>The admin of the system can view all the tickets created by users, answer to them, change their status and filter them.</li>
 </ul>
-<br>
+<h1>Preview</h1>
+http://support.vanillamarketing.it/
 <img src="https://user-images.githubusercontent.com/30729360/65434688-851af680-de1f-11e9-8398-61bf5d415e7e.png">
