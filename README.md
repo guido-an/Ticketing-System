@@ -21,8 +21,8 @@ NODEMAILER_PSW=[nodemailer_psw]
 <ul>
 
 <li>The user can create a new ticket, upload images, see all his tickets, answer to the admin and filter the tickets according to the status that can be active or closed.</li>
-
-<li>The admin of the system can view all the tickets created by users, answer to them, changing their status and filtering them.</li>
+<br>
+<li>The admin of the system can view all the tickets created by users, answer to them, change their status and filter them.</li>
 </ul>
-
+<br>
 <img src="https://user-images.githubusercontent.com/30729360/65434688-851af680-de1f-11e9-8398-61bf5d415e7e.png">
