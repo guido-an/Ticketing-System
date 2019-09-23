@@ -6,6 +6,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const Ticket = require('../models/Ticket');
 
 const bcryptSalt = 10;
 
@@ -24,13 +25,15 @@ let user = {
   username: 'Test',
   password: bcrypt.hashSync('Test123!', bcrypt.genSaltSync(bcryptSalt)),
 };
+   
 
 // User.deleteMany()
 User.create(user)
   // .then(() => {
-  //   return user; //User.create(users)
+  //   return User.create(user)
   // })
   .then(usersCreated => {
+    Ticket
     console.log(`${usersCreated} user created with the following id:`);
     // console.log(usersCreated.map(u => u._id));
   })

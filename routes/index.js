@@ -42,9 +42,7 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
     auth: {
       user: process.env.NODEMAILER_EMAIL,
       pass: process.env.NODEMAILER_PSW
-    },
-    debug: true, // show debug output
-    logger: true // log information in console
+    }
   });
 
   transporter.sendMail({
@@ -55,14 +53,6 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
     text: req.body.message,
     html: req.body.message + '<br><br><a href="http://support.vanillamarketing.it/admin">Ticket</a>'
   })
-
-  // transporter.verify(function(error, success) {
-  //   if (error) {
-  //     console.log('error', error);
-  //   } else {
-  //     console.log("Server is ready to take our messages");
-  //   }
-  // });
 
   /* new ticket */
   let today = new Date();
