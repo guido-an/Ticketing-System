@@ -2,6 +2,10 @@
 http://support.vanillamarketing.it/
 
 An internal ticketing system application for managing new customers' requests.
+<hr>
+
+<h1>Instructions</h1>
+<hr>
 
 .env file
 
@@ -16,7 +20,8 @@ ADMIN_EMAIL=[admin_email]<br>
 NODEMAILER_EMAIL=[nodemailer_email]<br>
 NODEMAILER_PSW=[nodemailer_psw]
 
-<strong>Functionalities</strong>
+<h1>Functionalities</h1>
+<hr>
 
 <ul>
 
