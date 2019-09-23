@@ -22,7 +22,6 @@ NODEMAILER_EMAIL=[nodemailer_email]<br>
 NODEMAILER_PSW=[nodemailer_psw]
 
 <h1>Functionalities</h1>
-<hr>
 
 <ul>
 
