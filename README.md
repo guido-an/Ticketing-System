@@ -1,7 +1,7 @@
 # Ticketing System
 http://support.vanillamarketing.it/
 
-An internal ticketing system for managing new cusotmers' requests.
+An internal ticketing system application for managing new cusotmers' requests.
 
 .env file
 
