@@ -2,10 +2,10 @@
 http://support.vanillamarketing.it/
 
 An internal ticketing system application for managing new customers' requests.
-<hr>
+
 
 <h1>Instructions</h1>
-<hr>
+
 
 .env file
 
