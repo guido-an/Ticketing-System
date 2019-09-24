@@ -70,7 +70,10 @@ h3 {
     display: none; }
   #desktop-header-user {
     display: flex;
-    justify-content: space-around; } }
+    justify-content: space-around; }
+  #desktop-header-user ul {
+    position: relative;
+    bottom: 20px; } }
 
 /***************************
 ****** footerUser.hbs ******/

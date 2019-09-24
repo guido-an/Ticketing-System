@@ -52,6 +52,7 @@ h3{
   display: none
 }
 
+
 .header-user li{
   display: inline-block;
   margin: 10px;
@@ -84,6 +85,10 @@ h3{
   #desktop-header-user{
     display: flex;
     justify-content: space-around;
+  }
+  #desktop-header-user ul{
+    position: relative;
+    bottom: 20px
   }
 }
 
