@@ -1,160 +1,156 @@
-
 /***************************
 ****** GENERAL ******/
 
 body {
-  font-family: "Nunito" !important;
+  font-family: 'Nunito' !important;
   position: relative;
   min-height: 100vh;
 }
-p{
-  font-size: 16px !important
+p {
+  font-size: 16px !important;
 }
 
-li{
+li {
   list-style: none;
 }
 a {
-  font-size: 16px !important
+  font-size: 16px !important;
 }
-a:hover{
-  text-decoration: none !important
+a:hover {
+  text-decoration: none !important;
 }
 
-input{
+input {
   padding: 10px 20px;
   border-top: none;
   border-right: none;
   border-left: none;
-
 }
 
-h1{
-  font-weight: 700 !important
+h1 {
+  font-weight: 700 !important;
 }
-h3{
+h3 {
   font-weight: 600 !important;
-  font-size: 22px !important
+  font-size: 22px !important;
 }
 
-.box-shadow{
-  box-shadow: 0px 1px 2px rgba(46,41,51,0.08), 0px 2px 4px rgba(71,63,79,0.08);
+.box-shadow {
+  box-shadow: 0px 1px 2px rgba(46, 41, 51, 0.08),
+    0px 2px 4px rgba(71, 63, 79, 0.08);
   margin-top: 40px;
   padding-top: 20px;
-  padding-bottom: 60px
+  padding-bottom: 60px;
 }
-
 
 /***************************
 ****** headerUser.hbs ******/
 
-#desktop-header-user{
-  display: none
+#desktop-header-user {
+  display: none;
 }
 
-.logout-link{
+.logout-link {
   color: #777 !important;
   border: 2px solid #777;
   padding: 6px 15px;
- border-radius: 4px;
- display: inline-block;
- position: relative;
- top: 20px;
- margin-bottom: 40px
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
 }
-.logout-link:hover{
+.logout-link:hover {
   color: #222 !important;
   border: 2px solid #222;
 }
 
-@media(min-width:1200px){
-  #mobile-header-user{
-    display: none
+@media (min-width: 1200px) {
+  #mobile-header-user {
+    display: none;
   }
-  #desktop-header-user{
+  #desktop-header-user {
     display: flex;
     justify-content: space-around;
   }
-  #desktop-header-user ul{
+  #desktop-header-user ul {
     display: flex;
   }
-  #desktop-header-user li{
+  #desktop-header-user li {
     display: inline-block;
     margin: 10px;
-    padding-top: 20px
+    padding-top: 20px;
   }
-  #desktop-header-user ul li a{
-    font-size: 16px
+  #desktop-header-user ul li a {
+    font-size: 16px;
   }
-  #desktop-header-user ul li:nth-child(3){
+  #desktop-header-user ul li:nth-child(3) {
     position: relative;
-    left: 60px
+    left: 60px;
   }
-  .logout-link{
+  .logout-link {
     top: -8px;
-    left: 40px
+    left: 40px;
   }
 }
 
 /***************************
 ****** footerUser.hbs ******/
-.footer{
+.footer {
   position: absolute;
   bottom: -120px;
   background-color: #fafafa;
   width: 100%;
-  height: 60px
+  height: 60px;
 }
 
 /***************************
 ****** loginPage.hbs *******/
-.login-section h1{
+.login-section h1 {
   margin-top: 40px;
- margin-bottom: 60px
+  margin-bottom: 60px;
 }
-.login-section input{
+.login-section input {
   margin: 0 auto;
   display: block;
   width: 300px;
   margin-bottom: 20px;
   height: 40px;
 }
-.login-section button{
+.login-section button {
   margin: 0 auto;
   display: block;
-  margin-top: 40px
+  margin-top: 40px;
 }
 
 /***************************
 ****** TICKETS PAGE ******/
-.tickets-page table{
+.tickets-page table {
   margin-top: 40px;
-  border-radius:4px
+  border-radius: 4px;
 }
 .tickets-page td,
 th {
   border: 1px solid #fafafa;
   border-right: none;
-  border-left:none;
+  border-left: none;
   text-align: left;
   padding: 8px !important;
   width: 30%;
 }
-.tickets-page .view-ticket{
+.tickets-page .view-ticket {
   position: relative;
-  right: 20px
+  right: 20px;
 }
-.tickets-page h3{
+.tickets-page h3 {
   position: relative;
-  bottom: 5px
+  bottom: 5px;
 }
 
-.date-tickets-table{
-  font-size:14px !important;
+.date-tickets-table {
+  font-size: 14px !important;
   color: #777;
 }
-.no-ticket-open{
-  margin-top: 80px
+.no-ticket-open {
+  margin-top: 80px;
 }
 
 /***************************
@@ -163,101 +159,111 @@ th {
   display: flex;
   justify-content: center;
   margin-top: 40px;
-  padding: 40px
+  padding: 40px;
 }
-.submit-form-container input{
+.submit-form-container input {
   display: block;
   width: 100%;
   margin: 10px;
-
 }
-.submit-form-container textarea{
+.submit-form-container textarea {
   width: 100%;
   margin: 10px;
   border-top: none;
-  border-left:none;
-  border-right:none;
-  border-bottom: 3px solid #fafafa
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #fafafa;
 }
-.submit-form-container .user-input{
-  display: none !important
+.submit-form-container .user-input {
+  display: none !important;
 }
-.submit-form-container .user-message{
-padding-bottom: 200px
+.submit-form-container .user-message {
+  padding-bottom: 200px;
 }
-.submit-form-container .user-message::placeholder{
-  display: none
+.submit-form-container .user-message::placeholder {
+  display: none;
 }
-.ticket-created-msg{
+.ticket-created-msg {
   color: green;
-  margin-top: 40px
+  margin-top: 40px;
 }
 
-@media(min-width:1200px){
+@media (min-width: 1200px) {
   .submit-form-container textarea,
-  .submit-form-container input{
-    width: 500px
+  .submit-form-container input {
+    width: 500px;
   }
 }
 /***************************
 ****** userTicket.hbs ******/
-.user-ticket-page{
-  padding: 20px 40px
+.user-ticket-page {
+  padding: 20px 40px;
 }
 .user-ticket-container,
-.user-answer{
+.user-answer {
   width: 80%;
   margin: 0 auto;
 }
-.user-ticket-container span{
-   color: #777
+.user-ticket-container span {
+  color: #777;
 }
-.user-ticket-container p{
+.user-ticket-container p {
   color: #222;
-  margin-top: 20px
+  margin-top: 20px;
 }
-.user-answer input{
+.user-answer input {
   display: block;
   margin: 10px auto;
   width: 100%;
-  
 }
-.user-answer textarea{
+.user-answer textarea {
   width: 100%;
   margin: 0 auto;
   display: block;
   height: 200px;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
-.user-id-input{
-  display: none !important
+.user-id-input {
+  display: none !important;
 }
-.user-answer button{
+.user-answer button {
   margin: 20px auto;
   display: block;
 }
 
-@media(min-width:1200px){
+@media (min-width: 1200px) {
   .user-answer textarea,
-  .user-answer input{
-    width: 500px
+  .user-answer input {
+    width: 500px;
   }
 }
 /***************************
 ****** activeTicket.hbs ******/
-#active-tickets-user{
-  margin-top: 80px
+#active-tickets-user {
+  margin-top: 80px;
 }
-#active-tickets-user h1{
-  margin-bottom: 40px
+#active-tickets-user h1 {
+  margin-bottom: 40px;
 }
-
 
 /****************************** ADMIN SECTION ****************************** /
 
 /***************************
 ****** admin/admin.hbs ******/
-.admin-page h3{
+.admin-page h3 {
   position: relative;
-  bottom: 5px
+  bottom: 5px;
+}
+.admin-page button{
+  width: 100px
+}
+
+/***************************
+****** partials/headerAdmin.hbs ******/
+#header-admin {
+  display: flex;
+  justify-content: space-between;
+}
+#header-admin .logout-link{
+  top: 20px
 }
