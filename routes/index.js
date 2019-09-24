@@ -56,7 +56,8 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
 
   /* new ticket */
   let today = new Date();
-  let date = today.getDate() + '-'+(today.getMonth()+1) + "-" + today.getFullYear()+ ' ' + " | " +  today.getHours() + ":" + today.getMinutes() ;
+  minutes = today.getMinutes().toString().padStart(2, '0') // adding a 0 if less then 10
+  let date = today.getDate() + '-'+(today.getMonth()+1) + "-" + today.getFullYear()+ ' ' + " | " +  today.getHours() + ":" + minutes ;
 
   if(req.file == undefined){
     req.file = ""
