@@ -164,12 +164,12 @@ th {
 }
 .submit-form-container input{
   display: block;
-  width: 500px;
+  width: 100%;
   margin: 10px;
 
 }
 .submit-form-container textarea{
-  width: 500px;
+  width: 100%;
   margin: 10px;
   border-top: none;
   border-left:none;
@@ -190,6 +190,12 @@ padding-bottom: 200px
   margin-top: 40px
 }
 
+@media(min-width:1200px){
+  .submit-form-container textarea,
+  .submit-form-container input{
+    width: 500px
+  }
+}
 /***************************
 ****** userTicket.hbs ******/
 .user-ticket-page{
@@ -210,11 +216,11 @@ padding-bottom: 200px
 .user-answer input{
   display: block;
   margin: 10px auto;
-  width: 500px;
+  width: 100%;
   
 }
 .user-answer textarea{
-  width: 500px;
+  width: 100%;
   margin: 0 auto;
   display: block;
   height: 200px;
@@ -224,11 +230,16 @@ padding-bottom: 200px
   display: none !important
 }
 .user-answer button{
-  margin: 0 auto;
+  margin: 20px auto;
   display: block;
-  margin-top: 20px
 }
 
+@media(min-width:1200px){
+  .user-answer textarea,
+  .user-answer input{
+    width: 500px
+  }
+}
 /***************************
 ****** activeTicket.hbs ******/
 #active-tickets-user{
