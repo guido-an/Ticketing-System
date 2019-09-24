@@ -1,3 +1,7 @@
+
+/***************************
+****** GENERAL ******/
+
 body {
   font-family: "Nunito" !important;
   position: relative;
@@ -40,7 +44,9 @@ h3{
   padding-bottom: 60px
 }
 
-/** header user **/
+
+/***************************
+****** headerUser.hbs ******/
 
 #desktop-header-user{
   display: none
@@ -87,7 +93,8 @@ h3{
   }
 }
 
-/** footer user **/
+/***************************
+****** footerUser.hbs ******/
 .footer{
   position: absolute;
   bottom: -120px;
@@ -96,7 +103,8 @@ h3{
   height: 60px
 }
 
-/** LOGIN section **/
+/***************************
+****** loginPage.hbs *******/
 .login-section h1{
   margin-top: 40px;
  margin-bottom: 60px
@@ -114,8 +122,8 @@ h3{
   margin-top: 40px
 }
 
-/** private and tickets **/
-
+/***************************
+****** TICKETS PAGE ******/
 .tickets-page table{
   margin-top: 40px;
   border-radius:4px
@@ -146,8 +154,8 @@ th {
   margin-top: 80px
 }
 
-/** submit page **/
-
+/***************************
+****** submit.hbs ******/
 .submit-form-container {
   display: flex;
   justify-content: center;
@@ -182,7 +190,8 @@ padding-bottom: 200px
   margin-top: 40px
 }
 
-/** user ticket page **/
+/***************************
+****** userTicket.hbs ******/
 .user-ticket-page{
   padding: 20px 40px
 }
@@ -220,16 +229,21 @@ padding-bottom: 200px
   margin-top: 20px
 }
 
-/** admin page **/
-.admin-page h3{
-  position: relative;
-  bottom: 5px
-}
-
-/** active tickets user page **/
+/***************************
+****** activeTicket.hbs ******/
 #active-tickets-user{
   margin-top: 80px
 }
 #active-tickets-user h1{
   margin-bottom: 40px
+}
+
+
+/****************************** ADMIN SECTION ****************************** /
+
+/***************************
+****** admin/admin.hbs ******/
+.admin-page h3{
+  position: relative;
+  bottom: 5px
 }
