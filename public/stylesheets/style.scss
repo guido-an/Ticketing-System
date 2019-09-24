@@ -58,7 +58,9 @@ h3{
   padding: 6px 15px;
  border-radius: 4px;
  display: inline-block;
- margin: 20px
+ position: relative;
+ top: 20px;
+ margin-bottom: 40px
 }
 .logout-link:hover{
   color: #222 !important;
@@ -87,6 +89,9 @@ h3{
   #desktop-header-user ul li:nth-child(3){
     position: relative;
     left: 60px
+  }
+  .logout-link{
+    top: -5px
   }
 }
 
