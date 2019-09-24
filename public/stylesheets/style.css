@@ -35,6 +35,9 @@ h3 {
   padding-bottom: 60px; }
 
 /** header user **/
+#desktop-header-user {
+  display: none; }
+
 .header-user {
   display: flex;
   justify-content: space-around;
@@ -47,7 +50,8 @@ h3 {
 
 .header-user li {
   display: inline-block;
-  margin: 10px; }
+  margin: 10px;
+  padding-top: 20px; }
 
 .header-user ul li a {
   font-size: 16px; }
@@ -60,11 +64,17 @@ h3 {
   color: #777 !important;
   border: 2px solid #777;
   padding: 6px 15px;
-  border-radius: 4px; }
+  border-radius: 4px;
+  display: inline-block;
+  margin: 20px; }
 
 .logout-link:hover {
   color: #222 !important;
   border: 2px solid #222; }
+
+@media (min-width: 1200px) {
+  #mobile-header-user {
+    display: none; } }
 
 /** footer user **/
 .footer {
