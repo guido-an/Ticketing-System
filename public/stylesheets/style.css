@@ -41,18 +41,6 @@ h3 {
 #desktop-header-user {
   display: none; }
 
-.header-user li {
-  display: inline-block;
-  margin: 10px;
-  padding-top: 20px; }
-
-.header-user ul li a {
-  font-size: 16px; }
-
-.header-user ul li:nth-child(3) {
-  position: relative;
-  left: 60px; }
-
 .logout-link {
   color: #777 !important;
   border: 2px solid #777;
@@ -72,8 +60,16 @@ h3 {
     display: flex;
     justify-content: space-around; }
   #desktop-header-user ul {
+    display: flex; }
+  #desktop-header-user li {
+    display: inline-block;
+    margin: 10px;
+    padding-top: 20px; }
+  #desktop-header-user ul li a {
+    font-size: 16px; }
+  #desktop-header-user ul li:nth-child(3) {
     position: relative;
-    bottom: 20px; } }
+    left: 60px; } }
 
 /***************************
 ****** footerUser.hbs ******/
