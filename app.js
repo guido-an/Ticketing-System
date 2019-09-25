@@ -94,14 +94,14 @@ app.use(flash());
 require('./passport')(app);
     
 
-const index = require('./routes/index');
-app.use('/', index);
+const user = require('./routes/user');
+app.use('/', user);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
 const admin = require('./routes/admin');   
-app.use('/', admin)
+app.use('/admin', admin)
       
 
 module.exports = app;

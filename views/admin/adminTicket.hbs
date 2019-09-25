@@ -37,8 +37,11 @@
   <div class="user-answer">
     <form action="/admin/answer" method="POST" enctype="multipart/form-data">
       <p class="text-center"><strong>Nuova risposta</strong></p>
+
       <input class="user-id-input" hidden value={{ticket._id}} name="_id">
-      {{!-- <input type="text" name="message" placeholder="message"> --}}
+      <input class="user-id-input" hidden value={{ticket.user.email}} name="email">
+      <input class="user-id-input" hidden value={{ticket.title}} name="title">
+
       <textarea name="message" placeholder="Messaggio*"></textarea>
       <input type="text" name="name" placeholder="Nome file">
       
@@ -47,3 +50,5 @@
     </form>
   </div>
 </section>
+
+{{log this}}

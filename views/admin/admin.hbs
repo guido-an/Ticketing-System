@@ -35,12 +35,13 @@
           <td>{{#if active}}
             <form action="/admin/active-false" method="POST">
               <input hidden type="text" value={{_id}} name="_id">
-              <button class="btn btn-danger" type="submit">Chiudi ticket</button>
+              {{log this}}
+              <button class="btn btn-danger" type="submit">X</button>
             </form>
             {{else}}
             <form action="/admin/active-true" method="POST">
               <input hidden type="text" value={{_id}} name="_id">
-              <button class="btn btn-success" type="submit">Apri ticket</button>
+              <button class="btn btn-success" type="submit">V</button>
             </form>
             {{/if}}</td>
            
