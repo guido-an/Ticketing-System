@@ -2,10 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Ticket = require("../models/Ticket");
 const User = require("../models/User");
+const Customer = require("../models/Customer");
 var ObjectId = require("mongodb").ObjectID;
 const multer  = require('multer'); // middleware for sending image to the server
 const uploadCloud = require('../config/cloudinary');
 const nodemailer = require("nodemailer");
+
+const bodyParser = require('body-parser')
 
 
 
@@ -27,13 +30,21 @@ router.use("/submit", (req, res, next) => {
 });
 
 router.get("/submit", (req, res, next) => {
-  res.render("submit", { user: req.session.currentUser });
+  Customer.find()
+  .then(customers => {
+    console.log(customers)
+    res.render("submit", { user: req.session.currentUser, customers: customers  });
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
 });
 
 /******************************
 3) POST submit - Create new ticket *********/
 router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
-
+console.log(req.body)
   /* nodemailer */ 
   let transporter = nodemailer.createTransport({
     host: "hostingssd12.netsons.net",
@@ -69,6 +80,7 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
     user: req.body.user,
     active: true,
     time: date,
+    customer: "5dbafb234c20f734f8b2fc01",
     picture: {
       name: req.body.name,
       path: req.file.url,

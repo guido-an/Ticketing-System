@@ -1,24 +1,34 @@
 {{> headerUser}}
 
 <section class="submit-page container box-shadow">
-<h1 class="text-center">New ticket</h1>
+  <h1 class="text-center">New ticket</h1>
 
-<div class="submit-form-container">
-<form action="/submit" method="POST" enctype="multipart/form-data">
-  <input class="user-input" type="text" value={{user._id}} name="user">
-  <p><strong>Titolo</strong></p>
-  <input type="text" name="title" placeholder="Titolo*">
-  <p><strong>Messaggio</strong></p>
-  <textarea class="user-message" name="message" placeholder="Messaggio*">
-</textarea>
-  <input type="text" name="name" placeholder="File name">
-  <input type="file" name="photo">
-  <button type="submit" class="btn btn-success">Crea ticket</button>
+  <div class="submit-form-container">
 
-</form>
+    <form action="/submit" method="POST" enctype="multipart/form-data">
+    <p><strong>Cliente</strong></p>
+      <select>
+        {{#each customers}}
+        <option value={{_id}}>{{name}}</option>
+        {{/each}}
+
+      </select>
+      <input class="user-input" type="text" value={{user._id}} name="user">
+      <p><strong>Titolo</strong></p>
+      <input type="text" name="title" placeholder="Titolo*">
+      <p><strong>Messaggio</strong></p>
+      <textarea class="user-message" name="message" placeholder="Messaggio*">
+
+    </textarea>
+
+      <input type="text" name="name" placeholder="File name">
+      <input type="file" name="photo">
+      <button type="submit" class="btn btn-success">Crea ticket</button>
+
+    </form>
 
 
-</div>
+  </div>
 
 
 

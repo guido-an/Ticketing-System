@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const User = require('../models/User')
+const Customer = require('../models/Customer')
 
 const ticketSchema = new Schema(
   {
@@ -10,6 +11,7 @@ const ticketSchema = new Schema(
     message: { type: String, required: true },
     active: Boolean,
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    customer: { type: mongoose.Schema.Types.ObjectId, ref: "Customer", required: true },
     answers: Array,
     time: String,
     picture: Object
