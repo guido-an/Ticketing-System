@@ -100,6 +100,7 @@ router.post("/signup", (req, res, next) => {
       email
     });
 
+    
     newUser
       .save()
       .then(() => {
