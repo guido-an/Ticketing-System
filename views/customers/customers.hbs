@@ -1,5 +1,13 @@
-<h1>Lista clienti</h1>
-{{#each customers}}
-     <p><strong>{{name}}</strong></p>
-     <a href="/customers/tickets/{{id}}">Lista tickets</a>
-{{/each}}
+{{> headerUser}}
+
+
+<section class="customers-section container box-shadow">
+     <h1 class="text-center">TUTTI I CLIENTI</h1>
+     {{#each customers}}
+     <h3 class="text-center"><strong>{{name}}</strong></h3>
+     <a href="/customers/tickets/{{id}}">Tutti i tickets</a>
+     {{/each}}
+</section>
+
+
+{{> footerUser}}

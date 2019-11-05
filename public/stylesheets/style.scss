@@ -49,6 +49,9 @@ h3 {
 #desktop-header-user {
   display: none;
 }
+#mobile-header-user a{
+  color:#333
+}
 
 .logout-link {
   color: #777 !important;
@@ -62,6 +65,44 @@ h3 {
   color: #222 !important;
   border: 2px solid #222;
 }
+
+/* Dropdown Button */
+.dropbtn {
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+
 
 @media (min-width: 1200px) {
   #mobile-header-user {
@@ -78,11 +119,13 @@ h3 {
     display: inline-block;
     margin: 10px;
     padding-top: 20px;
+   
   }
   #desktop-header-user ul li a {
     font-size: 16px;
+    color: #333
   }
-  #desktop-header-user ul li:nth-child(3) {
+  #desktop-header-user ul li:nth-child(4) {
     position: relative;
     left: 60px;
   }
@@ -92,12 +135,12 @@ h3 {
   }
 }
 
+
 /***************************
 ****** footerUser.hbs ******/
 .footer {
   position: absolute;
   bottom: -120px;
-  background-color: #fafafa;
   width: 100%;
   height: 60px;
 }
@@ -166,23 +209,24 @@ th {
   width: 100%;
   margin: 10px;
 }
+.submit-form-container select{
+  margin-bottom: 20px
+}
 .submit-form-container textarea {
   width: 100%;
-  margin: 10px;
   border-top: none;
   border-left: none;
   border-right: none;
   border-bottom: 3px solid #fafafa;
 }
+
 .submit-form-container .user-input {
   display: none !important;
 }
 .submit-form-container .user-message {
   padding-bottom: 200px;
 }
-.submit-form-container .user-message::placeholder {
-  display: none;
-}
+
 .ticket-created-msg {
   color: green;
   margin-top: 40px;
@@ -222,6 +266,7 @@ th {
   display: block;
   height: 200px;
   margin-bottom: 10px;
+  padding: 10px
 }
 .user-id-input {
   display: none !important;
@@ -266,4 +311,28 @@ th {
 }
 #header-admin .logout-link{
   top: 20px
+}
+
+
+
+/***************************
+****** CUSTOMERS ******/
+.customers-section a {
+  display: flex;
+  justify-content: center;
+}
+.customers-section h3 {
+  margin-top: 40px;
+  text-transform: uppercase;
+}
+
+/***************************
+****** NEW CUSTOMER ******/
+.new-customer{
+  margin-top: 80px
+}
+.new-customer form{
+  display: flex;
+  justify-content: center;
+  margin-top: 40px
 }

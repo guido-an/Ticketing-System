@@ -1,4 +1,11 @@
-<form action="/customers/new-customer" method="POST">
-   <input type="text" name="name" placeholder="Nome">
-   <button tyoe="submit">Aggiungi cliente</button>
-</form>
+{{> headerUser}}
+<section class="new-customer">
+   <h1 class="text-center">NUOVO CLIENTE</h1>
+   <form action="/customers/new-customer" method="POST">
+      <input type="text" name="name" placeholder="Nome">
+      <button class="btn btn-primary" type="submit">Aggiungi cliente</button>
+   </form>
+   {{#if errorMessage}}
+ <p class="text-center" style="margin-top:40px">{{errorMessage}}</p>
+ {{/if}}
+</section>

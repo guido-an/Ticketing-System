@@ -1,13 +1,21 @@
 {{!-- MOBILE --}}
 <nav id="mobile-header-user" class="text-center">
   <div>
-     <a href="/"><img class="logo" src="http://www.vanillamarketing.it/wp-content/uploads/2014/10/logo_vanilla_marketing.png"
-      width="180px"></a>
+    <a href="/"><img class="logo"
+        src="/images/logo-vanilla-marketing.png" width="180px"></a>
   </div>
   <div>
-    <p><a href="/customers">Clienti</a></p>
     <p><a href="/tickets">I miei tickets</a></p>
     <p><a href="/submit">Apri un ticket</a></p>
+    <p>
+      <div class="dropdown">
+        <a href="/customers" class="dropbtn">Clienti</a>
+        <div class="dropdown-content">
+          <a href="/customers/new-customer">Aggiungi cliente</a>
+
+        </div>
+      </div>
+    </p>
     <p><a class="logout-link" href="/auth/logout">Logout</a></p>
   </div>
 </nav>
@@ -15,16 +23,25 @@
 
 {{!-- DESKTOP --}}
 <nav id="desktop-header-user" class="container">
-   <div>
-     <a href="/"><img class="logo" src="http://www.vanillamarketing.it/wp-content/uploads/2014/10/logo_vanilla_marketing.png"
-      width="180px"></a>
+  <div>
+    <a href="/"><img class="logo"
+        src="/images/logo-vanilla-marketing.png" width="180px"></a>
   </div>
   <div>
     <ul>
       <li><a href="/tickets">I miei tickets</a></li>
       <li><a href="/submit">Apri un ticket</a></li>
+      <li>
+        <div class="dropdown">
+          <a href="/customers" class="dropbtn">Clienti</a>
+          <div class="dropdown-content">
+            <a href="/customers/new-customer">Aggiungi cliente</a>
+
+          </div>
+        </div>
+      </li>
       <li><a class="logout-link" href="/auth/logout">Logout</a></li>
+
     </ul>
   </div>
 </nav>
-

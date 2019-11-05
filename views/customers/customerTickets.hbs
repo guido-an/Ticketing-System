@@ -1,5 +1,14 @@
-<h1>{{customer.name}} lista tickets</h1>
+{{> headerUser}}
+
+
+<section class="tickets-page container box-shadow text-center">
+<h1>{{customer.name}}: tutti i tickets </h1>
 
 {{#each customer.tickets}}
-   <a href="/tickets/{{_id}}">{{title}}</a>
+   <p><a href="/tickets/{{_id}}">{{title}}</a></p>
 {{/each}}
+</section>
+
+
+
+{{> footerUser}}

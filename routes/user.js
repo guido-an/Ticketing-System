@@ -14,7 +14,7 @@ const bodyParser = require('body-parser')
 
 /******************************
 1) GET home  *********/
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
   res.render("index");
 });
 
@@ -30,10 +30,9 @@ router.use("/submit", (req, res, next) => {
 });
 
 router.get("/submit", (req, res, next) => {
-  Customer.find()
+  Customer.find().sort({"name": 1})
   .then(customers => {
-    console.log(customers)
-    res.render("submit", { user: req.session.currentUser, customers: customers  });
+    res.render("user/submit", { user: req.session.currentUser, customers: customers  });
   })
   .catch(err => {
     console.log(err)
@@ -106,7 +105,7 @@ router.get("/tickets", (req, res) => {
   if (req.session.currentUser) {
     Ticket.find({ user: ObjectId(req.session.currentUser._id) }).sort({ created_at: -1 })
       .then(tickets => {
-        res.render("tickets", { tickets: tickets, user: req.session.currentUser });
+        res.render("user/tickets", { tickets: tickets, user: req.session.currentUser });
         
       })
       .catch(err => {
@@ -125,7 +124,7 @@ router.get("/tickets/:id", (req, res) => {
   const ticket = Ticket.findById(req.params.id);
   Promise.all([user, ticket])
     .then(values => {
-      res.render("userTicket", { values: values });
+      res.render("user/userTicket", { values: values });
     })
     .catch(err => {
       console.log(err);
@@ -184,7 +183,7 @@ router.get("/active-tickets", (req, res) => {
   
   Ticket.find({ author: req.session.currentUser.username, active: true } )
     .then(activeTickets => {
-      res.render("activeTickets", { activeTickets: activeTickets });
+      res.render("user/activeTickets", { activeTickets: activeTickets });
     })
     .catch(err => {
       console.log(err);
