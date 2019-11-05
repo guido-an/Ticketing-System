@@ -30,7 +30,6 @@ router.get('/new-customer', (req, res) => {
   res.render('customers/newCustomer');
 });
 
-
 /******************************
 3) POST new customer *********/
 router.post('/new-customer', (req, res) => {
