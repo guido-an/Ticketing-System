@@ -63,6 +63,8 @@ hbs.registerHelper('ifUndefined', (value, options) => {
 });
 
 
+
+
 //register partial views
 hbs.registerPartials(__dirname + "/views/partials");
   
