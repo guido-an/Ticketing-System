@@ -156,16 +156,5 @@ router.get('/filter-by-status', (req, res) => {
     });
 });
 
-/**************************
-8) GET filtered tickets by author */
-// router.get("/admin/filter-by-author/:author", (req, res) => {
-//   Ticket.find({ author: req.params.author })
-//     .then(ticketsByAuthor => {
-//       res.render("admin/ticketsByAuthor", { ticketsByAuthor: ticketsByAuthor });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
 
 module.exports = router;
