@@ -100,7 +100,9 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
 router.get("/tickets", (req, res) => {
   if (req.session.currentUser) {
     Ticket.find({ user: ObjectId(req.session.currentUser._id) }).sort({ created_at: -1 })
+    .populate('customer')
       .then(tickets => {
+        console.log("customer", tickets)
         res.render("user/tickets", { tickets: tickets, user: req.session.currentUser });
         
       })

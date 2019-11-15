@@ -9,7 +9,7 @@
     <thead>
       <th>Titolo</th>
       <th>Data</th>
-    
+      <th>Cliente</th>
       <th>Stato</th>
       <th>Cambia stato</th>
       <th></th>
@@ -24,6 +24,9 @@
           <td>
             
             <p class="date-tickets-table">{{time}} - <strong>{{author}}</strong></p>
+          </td>
+          <td>
+            <p class="date-tickets-table"><strong>{{customer.name}}</strong></p>
           </td>
           <td> {{#if active}}
             <p class="text-success">Aperto</p>
@@ -54,12 +57,7 @@
 </section>
 
 
-{{!-- <h2>tickets by author</h2>
-      <ul>
-        {{#each tickets}}
-        <li><a href="/admin/filter-by-author/{{author}}">{{author}} tickets</a> </li>
-        {{/each}}
-      </ul> --}}
+{{log this}}
 
 
       

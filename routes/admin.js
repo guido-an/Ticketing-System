@@ -28,7 +28,9 @@ router.use('/', (req, res, next) => {
 2) GET tickets | admin/admin ******************/
 router.get('/', (req, res, next) => {
   Ticket.find()
+  .populate('customer')
     .then(tickets => {
+      console.log(tickets, 'tickets')
       res.render('admin/admin', {tickets: tickets});
     })
     .catch(err => {
@@ -41,6 +43,7 @@ router.get('/', (req, res, next) => {
 router.get('/ticket/:id', (req, res) => {
   Ticket.findById(req.params.id)
     .populate('user')
+    .populate('customer')
     .then(ticket => {
       res.render('admin/adminTicket', {ticket: ticket});
     })
