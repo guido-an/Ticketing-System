@@ -12,7 +12,6 @@ const bodyParser = require('body-parser')
 
 
 
-
 /******************************
 1) GET home  *********/
 router.get("/", (req, res) => {
@@ -44,58 +43,66 @@ router.get("/submit", (req, res, next) => {
 /******************************
 3) POST submit - Create new ticket *********/
 router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
-console.log(req.body)
-  /* nodemailer */ 
-  let transporter = nodemailer.createTransport({
-    host: "hostingssd12.netsons.net",
-    port: 465,
-    secure: true, // use TLS
-    auth: {
-      user: process.env.NODEMAILER_EMAIL,
-      pass: process.env.NODEMAILER_PSW
-    }
-  });
-
-  transporter.sendMail({
-    // email to the ADMIN
-    from: process.env.NODEMAILER_EMAIL,
-    to: process.env.ADMIN_EMAIL,
-    subject: `Nuovo ticket| ${req.body.title}`,
-    text: req.body.message,
-    html: req.body.message + '<br><br><a href="http://support.vanillamarketing.it/admin">Ticket</a>'
-  })
-
-  /* new ticket */
-  let today = new Date();
-  minutes = today.getMinutes().toString().padStart(2, '0') // adding a 0 if less then 10
-  let date = today.getDate() + '-'+(today.getMonth()+1) + "-" + today.getFullYear()+ ' ' + " | " +  today.getHours() + ":" + minutes ;
-
-  if(req.file == undefined){
-    req.file = ""
-  }
-  let myTicket = new Ticket({
-    author: req.session.currentUser.username,
-    title: req.body.title,
-    message: req.body.message,
-    user: req.body.user,
-    active: true,
-    time: date,
-    customer: "5dbafb234c20f734f8b2fc01",
-    picture: {
-      name: req.body.name,
-      path: req.file.url,
-      originalName: req.file.originalname
-    }
-  });
-  myTicket
-    .save()
-    .then(() => {
-      res.redirect("/tickets");
-    })
-    .catch(err => {
-      console.log(err);
+  console.log(req.body, "req body")
+    /* nodemailer */ 
+    let transporter = nodemailer.createTransport({
+      host: "hostingssd12.netsons.net",
+      port: 465,
+      secure: true, // use TLS
+      auth: {
+        user: process.env.NODEMAILER_EMAIL,
+        pass: process.env.NODEMAILER_PSW
+      }
     });
-});
+  
+    transporter.sendMail({
+      // email to the ADMIN
+      from: process.env.NODEMAILER_EMAIL,
+      to: process.env.ADMIN_EMAIL,
+      subject: `Nuovo ticket| ${req.body.title}`,
+      text: req.body.message,
+      html: req.body.message + '<br><br><a href="http://support.vanillamarketing.it/admin">Ticket</a>'
+    })
+  
+    /* new ticket */
+    let today = new Date();
+    minutes = today.getMinutes().toString().padStart(2, '0') // adding a 0 if less then 10
+    let date = today.getDate() + '-'+(today.getMonth()+1) + "-" + today.getFullYear()+ ' ' + " | " +  today.getHours() + ":" + minutes ;
+  
+    if(req.file == undefined){
+      req.file = ""
+    }
+    let myTicket = new Ticket({
+      author: req.session.currentUser.username,
+      title: req.body.title,
+      message: req.body.message,
+      user: req.body.user,
+      active: true,
+      time: date,
+      customer: req.body.customer,
+      picture: {
+        name: req.body.name,
+        path: req.file.url,
+        originalName: req.file.originalname
+      }
+    });
+   
+      const ticket =  myTicket.save() // save ticket 
+      const customer = Customer.updateOne( // add the new ticket to the customer's tickets array 
+        { _id: req.body.customer },
+        { $push: { tickets: ObjectId(myTicket._id) } },
+        { new: true }
+      )
+      Promise.all([ticket, customer])
+      .then(() => {
+        res.redirect("/tickets");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+  
+
 
 
 

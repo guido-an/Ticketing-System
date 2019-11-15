@@ -6,8 +6,8 @@
   <div class="submit-form-container">
 
     <form action="/submit" method="POST" enctype="multipart/form-data">
-    <p><strong>Cliente</strong></p>
-      <select required="true">
+      <p><strong>Cliente</strong></p>
+      <select name="customer" required="true">
         <option>Scegli il cliente *</option>
         {{#each customers}}
         <option value={{_id}}>{{name}}</option>
@@ -23,15 +23,13 @@
     </textarea>
 
       <input type="text" name="name" placeholder="File name">
-      <input type="file" name="photo"> 
+      <input type="file" name="photo">
       <button type="submit" class="btn btn-success">Crea ticket</button>
 
     </form>
 
 
   </div>
-
-
 
 </section>
 {{> footerUser}}
