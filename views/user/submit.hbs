@@ -8,10 +8,13 @@
     <form action="/submit" method="POST" enctype="multipart/form-data">
       <p><strong>Cliente</strong></p>
       <select name="customer" required="true">
-        <option>Scegli il cliente *</option>
+        <option value="">Scegli il cliente *</option>
         {{#each customers}}
         <option value={{_id}}>{{name}}</option>
         {{/each}}
+        {{#if errorMessage}}
+           <p>{{errorMessage}}</p>
+        {{/if}}
 
       </select>
       <input class="user-input" type="text" value={{user._id}} name="user">

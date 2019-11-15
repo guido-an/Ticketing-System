@@ -6,33 +6,13 @@ const Ticket = require('../models/Ticket');
 var ObjectId = require('mongodb').ObjectID;
 const multer = require('multer'); // middleware for sending image to the server
 const uploadCloud = require('../config/cloudinary');
-const nodemailer = require('nodemailer');
+const sendEmail = require('../config/sendEmail')
+
 
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
-/* NODEMAILER */
-function sendEmail(email, title, message) {
-  let transporter = nodemailer.createTransport({
-    host: 'hostingssd12.netsons.net',
-    port: 465,
-    secure: true, // use TLS
-    auth: {
-      user: process.env.NODEMAILER_EMAIL,
-      pass: process.env.NODEMAILER_PSW,
-    },
-  });
-
-  transporter.sendMail({
-    // email to the USER
-    from: process.env.NODEMAILER_EMAIL,
-    to: email,
-    subject: title,
-    text: '',
-    html: message,
-  });
-}
 /*********************************************************
 1) USE and show all tickets if admin ******************/
 router.use('/', (req, res, next) => {
@@ -109,15 +89,13 @@ router.post('/answer', uploadCloud.single('photo'), (req, res) => {
 
   Ticket.updateOne({_id: _id}, {$push: {answers: newAnswer}}, {new: true})
     .then(() => {
-      // send email
       sendEmail(
+        process.env.NODEMAILER_EMAIL,
         email,
         `Nuova risposta | ${title}`,
         message +
           '<br><br><a href="http://support.vanillamarketing.it/tickets">Tickets</a>'
       );
-    })
-    .then(() => {
       res.redirect('/admin');
     })
     .catch(err => {

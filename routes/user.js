@@ -6,7 +6,7 @@ const Customer = require("../models/Customer");
 var ObjectId = require("mongodb").ObjectID;
 const multer  = require('multer'); // middleware for sending image to the server
 const uploadCloud = require('../config/cloudinary');
-const nodemailer = require("nodemailer");
+const sendEmail = require('../config/sendEmail')
 
 const bodyParser = require('body-parser')
 
@@ -43,27 +43,7 @@ router.get("/submit", (req, res, next) => {
 /******************************
 3) POST submit - Create new ticket *********/
 router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
-  console.log(req.body, "req body")
-    /* nodemailer */ 
-    let transporter = nodemailer.createTransport({
-      host: "hostingssd12.netsons.net",
-      port: 465,
-      secure: true, // use TLS
-      auth: {
-        user: process.env.NODEMAILER_EMAIL,
-        pass: process.env.NODEMAILER_PSW
-      }
-    });
-  
-    transporter.sendMail({
-      // email to the ADMIN
-      from: process.env.NODEMAILER_EMAIL,
-      to: process.env.ADMIN_EMAIL,
-      subject: `Nuovo ticket| ${req.body.title}`,
-      text: req.body.message,
-      html: req.body.message + '<br><br><a href="http://support.vanillamarketing.it/admin">Ticket</a>'
-    })
-  
+ 
     /* new ticket */
     let today = new Date();
     minutes = today.getMinutes().toString().padStart(2, '0') // adding a 0 if less then 10
@@ -86,6 +66,8 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
         originalName: req.file.originalname
       }
     });
+
+   
    
       const ticket =  myTicket.save() // save ticket 
       const customer = Customer.updateOne( // add the new ticket to the customer's tickets array 
@@ -95,6 +77,12 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
       )
       Promise.all([ticket, customer])
       .then(() => {
+        sendEmail(
+          process.env.NODEMAILER_EMAIL,
+          process.env.ADMIN_EMAIL,
+          `Nuovo ticket| ${req.body.title}`,
+          req.body.message + '<br><br><a href="http://support.vanillamarketing.it/admin">Ticket</a>'
+        );
         res.redirect("/tickets");
       })
       .catch(err => {
@@ -176,6 +164,12 @@ router.post("/answer", uploadCloud.single('photo'), (req, res) => {
     { new: true }
   )
     .then(() => {
+      sendEmail(
+        process.env.NODEMAILER_EMAIL,
+        process.env.ADMIN_EMAIL,
+        `Nuova risposta`,
+        req.body.message + '<br><br><a href="http://support.vanillamarketing.it/admin">Ticket</a>'
+      );
       res.redirect("/tickets");
     })
     .catch(err => {
