@@ -45,6 +45,7 @@ router.get('/ticket/:id', (req, res) => {
     .populate('user')
     .populate('customer')
     .then(ticket => {
+      console.log(ticket.answers, "tickets answers")
       res.render('admin/adminTicket', {ticket: ticket});
     })
     .catch(err => {
@@ -82,6 +83,7 @@ router.post('/answer', uploadCloud.single('photo'), (req, res) => {
     username: process.env.admin,
     message: message,
     time: date,
+    admin: true,
     picture: {
       name: req.body.name,
       //path: `/uploads/${req.file.filename}`,

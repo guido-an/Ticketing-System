@@ -7,6 +7,8 @@
   <div class="user-ticket-container">
     <p><strong>{{ticket.author}}</strong></p>
     <span>{{ticket.time}}</span>
+
+
     <p>{{ticket.message}}</p>
 
     {{#if ticket.picture.path}}
@@ -15,13 +17,29 @@
     </a>
     {{/if}}
     <hr>
+
+
     {{!-- ANSWERS --}}
     {{#each ticket.answers}}
-    <p><strong>{{username}}</strong></p><span>{{time}}</span>
-    <p>{{message}}</p>
+
+    {{#if admin}}
+    <div class="admin-answer">
+      <p><strong>{{username}}</strong></p><span>{{time}}</span>
+      <p>{{message}}</p>
+    </div>
+
+    {{else}}
+    <div>
+      <p><strong>{{username}}</strong></p><span>{{time}}</span>
+      <p>{{message}}</p>
+    </div>
+
+    {{/if}}
+
+
 
     {{#if picture.path}}
-     <a href="{{ picture.path }}" download>
+    <a href="{{ picture.path }}" download>
       <img src="{{ picture.path }}" width="150">
     </a>
     <p>{{picture.name}}</p>
@@ -33,7 +51,7 @@
   <hr>
 
 
-{{!-- USER ANSWER --}}
+  {{!-- USER ANSWER --}}
   <div class="user-answer">
     <form action="/admin/answer" method="POST" enctype="multipart/form-data">
       <p class="text-center"><strong>Nuova risposta</strong></p>
@@ -44,11 +62,9 @@
 
       <textarea name="message" placeholder="Messaggio*"></textarea>
       <input type="text" name="name" placeholder="Nome file">
-      
+
       <input type="file" name="photo">
       <button class="btn btn-success">Add answer</button>
     </form>
   </div>
 </section>
-
-{{log this}}
