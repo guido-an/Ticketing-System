@@ -220,9 +220,12 @@ th {
   color: #777; }
 
 .user-ticket-container p {
-  color: #222;
+  color: #272727;
   margin-top: 20px;
   white-space: pre-line; }
+
+.user-ticket-container p strong {
+  color: #222; }
 
 .user-answer input {
   display: block;
