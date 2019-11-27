@@ -27,7 +27,7 @@ router.use('/', (req, res, next) => {
 /*********************************************************
 2) GET tickets | admin/admin ******************/
 router.get('/', (req, res, next) => {
-  Ticket.find()
+  Ticket.find().sort({created_at: -1})
   .populate('customer')
     .then(tickets => {
       console.log(tickets, 'tickets')
