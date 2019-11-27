@@ -221,7 +221,8 @@ th {
 
 .user-ticket-container p {
   color: #222;
-  margin-top: 20px; }
+  margin-top: 20px;
+  white-space: pre-line; }
 
 .user-answer input {
   display: block;

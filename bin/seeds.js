@@ -11,22 +11,20 @@ const Ticket = require('../models/Ticket');
 const bcryptSalt = 10;
 
 mongoose
-  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(x => {
-    console.log(
-      `Connected to Mongo! Database name: "${x.connections[0].name}"`
-    );
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
   .catch(err => {
-    console.error('Error connecting to mongo', err);
+    console.error('Errror connecting to mongo', err)
   });
 
 let user = {
-  username: 'Test',
-  password: bcrypt.hashSync('Test123!', bcrypt.genSaltSync(bcryptSalt)),
+  username: 'Simone',
+  password: bcrypt.hashSync('Simone123!', bcrypt.genSaltSync(bcryptSalt)),
+  email: "simone@vanillamarketing.it"
 };
-   
-
+  
 // User.deleteMany()
 User.create(user)
   // .then(() => {
