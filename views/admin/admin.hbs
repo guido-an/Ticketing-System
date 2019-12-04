@@ -9,54 +9,45 @@
       <th>Titolo</th>
       <th>Data</th>
       <th>Cliente</th>
-      <th>Stato</th>
-      <th>Cambia stato</th>
-      <th></th>
+      <th>Ultima Risposta</th>
+      <th>Cambia Stato</th>
     </thead>
     <tbody>
       {{#each tickets}}
       <div class="private-container">
         <tr>
-          <td> <a href="/admin/ticket/{{id}}">
-              <h3>{{title}}</h3>
-            </a></td>
           <td>
-            
+            <a href="/admin/ticket/{{id}}">
+              <h3>{{title}}</h3>
+            </a>
+            </td>
+          <td>
             <p class="date-tickets-table">{{time}} - <strong>{{author}}</strong></p>
           </td>
           <td>
             <p class="date-tickets-table"><strong>{{customer.name}}</strong></p>
           </td>
-          <td> {{#if active}}
-            <p class="text-success">Aperto</p>
-            {{else}}
-            <p class="text-danger">Chiuso</p>
-            {{/if}}</td>
-          {{!-- <td><a class="view-ticket btn btn-primary" href="admin/tickets/{{id}}">View ticket</a> </td> --}}
-          <td>{{#if active}}
+          {{#if waitingForAnswer}}
+          <td>Utente</td>
+          {{else}}
+          <td>Admin</td>
+          {{/if}}
+          <td>
+            {{#if active}}
             <form action="/admin/active-false" method="POST">
               <input hidden type="text" value={{_id}} name="_id">
-              {{log this}}
-              <button class="btn btn-danger" type="submit">X</button>
+              <button type="submit">Aperto</button>
             </form>
             {{else}}
             <form action="/admin/active-true" method="POST">
               <input hidden type="text" value={{_id}} name="_id">
-              <button class="btn btn-success" type="submit">V</button>
+              <button class="btn" type="submit">Chiuso</button>
             </form>
-            {{/if}}</td>
-           
+            {{/if}}
+          </td>
         </tr>
       </div>
       {{/each}}
     </tbody>
   </table>
-
-
 </section>
-
-
-{{log this}}
-
-
-      

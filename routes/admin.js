@@ -6,8 +6,7 @@ const Ticket = require('../models/Ticket');
 var ObjectId = require('mongodb').ObjectID;
 const multer = require('multer'); // middleware for sending image to the server
 const uploadCloud = require('../config/cloudinary');
-const sendEmail = require('../config/sendEmail')
-
+const sendEmail = require('../config/sendEmail');
 
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt');
@@ -27,10 +26,11 @@ router.use('/', (req, res, next) => {
 /*********************************************************
 2) GET tickets | admin/admin ******************/
 router.get('/', (req, res, next) => {
-  Ticket.find().sort({created_at: -1})
-  .populate('customer')
+  Ticket.find()
+    .sort({created_at: -1})
+    .populate('customer')
     .then(tickets => {
-      console.log(tickets, 'tickets')
+      console.log(tickets, 'tickets');
       res.render('admin/admin', {tickets: tickets});
     })
     .catch(err => {
@@ -45,7 +45,7 @@ router.get('/ticket/:id', (req, res) => {
     .populate('user')
     .populate('customer')
     .then(ticket => {
-      console.log(ticket.answers, "tickets answers")
+      console.log(ticket.answers, 'tickets answers');
       res.render('admin/adminTicket', {ticket: ticket});
     })
     .catch(err => {
@@ -92,7 +92,9 @@ router.post('/answer', uploadCloud.single('photo'), (req, res) => {
     },
   };
 
-  Ticket.updateOne({_id: _id}, {$push: {answers: newAnswer}}, {new: true})
+  Ticket.updateOne({_id: _id}, 
+    {$push: {answers: newAnswer}, waitingForAnswer: false}, 
+    {new: true})
     .then(() => {
       sendEmail(
         process.env.NODEMAILER_EMAIL,
@@ -152,7 +154,7 @@ router.post('/active-true', (req, res) => {
 /*********************************************************
 7) GET tickets still active  *****************************/
 router.get('/filter-by-status', (req, res) => {
-  Ticket.find( { active: true } )
+  Ticket.find({active: true})
     .then(activeTickets => {
       res.render('admin/activeTickets', {activeTickets: activeTickets});
     })
@@ -160,6 +162,5 @@ router.get('/filter-by-status', (req, res) => {
       console.log(err);
     });
 });
-
 
 module.exports = router;

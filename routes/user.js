@@ -91,10 +91,6 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
   });
   
 
-
-
-
-
 /******************************
 4) GET tickets  *********/
 router.get("/tickets", (req, res) => {
@@ -162,7 +158,7 @@ router.post("/answer", uploadCloud.single('photo'), (req, res) => {
 
   Ticket.updateOne(
     { _id: _id },
-    { $push: { answers: newAnswer }, active: true },
+    { $push: { answers: newAnswer }, waitingForAnswer: true, active: true },
     { new: true }
   )
     .then(() => {

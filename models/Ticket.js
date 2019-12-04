@@ -13,6 +13,7 @@ const ticketSchema = new Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     customer: { type: mongoose.Schema.Types.ObjectId, ref: "Customer", required: true },
     answers: Array,
+    waitingForAnswer: Boolean,
     time: String,
     picture: Object
   },
