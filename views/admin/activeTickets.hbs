@@ -1,38 +1,6 @@
 {{> headerAdmin}}
-<section class="container">
 
-
- {{#if activeTickets}}
-  <table>
-    <thead>
-      <th>Titolo</th>
-      <th>Data</th>
-      <th>Stato</th>
-      <th></th>
-    </thead>
-    <tbody>
-      {{#each activeTickets}}
-      <div class="private-container">
-        <tr>
-          <td> <a href="/admin/ticket/{{id}}">
-              <h3>{{title}}</h3>
-            </a></td>
-          <td>
-            <p class="date-tickets-table">{{time}}</p>
-          </td>
-          <td> {{#if active}}
-            <p class="text-success">Aperto</p>
-            {{else}}
-            <p class="text-danger">Chiuso</p>
-            {{/if}}</td>
-          <td><a class="view-ticket btn btn-primary" href="/admin/ticket/{{id}}">View ticket</a> </td>
-        </tr>
-      </div>
-      {{/each}}
-    </tbody>
-  </table>
-  {{else}}
-<p>Non ci sono tickets aperti!</p>
-  {{/if}}
-
+<section class="container box-shadow">
+    <h1 class="text-center">Tickets ancora aperti</h1>
+  {{> adminTable}}
 </section>

@@ -7,30 +7,20 @@ var ObjectId = require('mongodb').ObjectID;
 const multer = require('multer'); // middleware for sending image to the server
 const uploadCloud = require('../config/cloudinary');
 const sendEmail = require('../config/sendEmail');
+const privateRouteAdmin = require('../config/privateRouteAdmin')
 
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
-/*********************************************************
-1) USE and show all tickets if admin ******************/
-router.use('/', (req, res, next) => {
-  if (req.session.currentUser.username === process.env.admin) {
-    // <== if there's user in the session (user is logged in) go to the next step
-    next();
-  } else {
-    res.redirect('/auth/login');
-  }
-});
 
 /*********************************************************
-2) GET tickets | admin/admin ******************/
-router.get('/', (req, res, next) => {
+1) GET tickets | admin/admin ******************/
+router.get('/', privateRouteAdmin, (req, res, next) => {
   Ticket.find()
     .sort({created_at: -1})
     .populate('customer')
     .then(tickets => {
-      console.log(tickets, 'tickets');
       res.render('admin/admin', {tickets: tickets});
     })
     .catch(err => {
@@ -53,8 +43,8 @@ router.get('/ticket/:id', (req, res) => {
     });
 });
 
-/*********************************************************
-4) POST | admin asnwer and send email ******************/
+/****************************************
+4) POST | admin asnwer and send email ***/
 router.post('/answer', uploadCloud.single('photo'), (req, res) => {
   let {_id, message, title, email} = req.body; // _id, title and email of the ticket (hidden input in adminTicket.hbs)
 
@@ -110,8 +100,9 @@ router.post('/answer', uploadCloud.single('photo'), (req, res) => {
     });
 });
 
-/*********************************************************
-5) POST | set ticket to false  *****************************/
+
+/***********************************
+5) POST | set ticket to false  *****/
 router.post('/active-false', (req, res) => {
   Ticket.findOneAndUpdate(
     {_id: ObjectId(req.body._id)},
@@ -155,8 +146,9 @@ router.post('/active-true', (req, res) => {
 7) GET tickets still active  *****************************/
 router.get('/filter-by-status', (req, res) => {
   Ticket.find({active: true})
+  .populate('customer')
     .then(activeTickets => {
-      res.render('admin/activeTickets', {activeTickets: activeTickets});
+      res.render('admin/activeTickets', {tickets: activeTickets});
     })
     .catch(err => {
       console.log(err);

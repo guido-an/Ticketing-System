@@ -67,8 +67,6 @@ router.post("/submit",  uploadCloud.single('photo'), (req, res) => {
       }
     });
 
-   
-   
       const ticket =  myTicket.save() // save ticket 
       const customer = Customer.updateOne( // add the new ticket to the customer's tickets array 
         { _id: req.body.customer },

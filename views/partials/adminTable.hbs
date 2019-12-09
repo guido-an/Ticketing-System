@@ -1,21 +1,10 @@
-{{>headerAdmin}}
-<section class="container box-shadow admin-page">
-  <form action="/admin/filter-by-status" method="GET">
-    <button class="btn" type="submit">Ticket aperti</button>
-  </form>
-  <h1 class="text-center">Admin tickets</h1>
-  {{> adminTable}}
-</section>
-
-
-
-  {{!-- <table>
+<table>
     <thead>
       <th>Titolo</th>
       <th>Data</th>
       <th>Cliente</th>
-      <th>Ultima Risposta</th>
-      <th>Cambia Stato</th>
+      <th>Ultima risposta</th>
+      <th>Stato</th>
     </thead>
     <tbody>
       {{#each tickets}}
@@ -54,4 +43,4 @@
       </div>
       {{/each}}
     </tbody>
-  </table> --}}
+  </table>
