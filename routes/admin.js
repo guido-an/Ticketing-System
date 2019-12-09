@@ -70,7 +70,7 @@ router.post('/answer', uploadCloud.single('photo'), (req, res) => {
   }
 
   let newAnswer = {
-    username: process.env.admin,
+    username: req.session.currentUser.username,
     message: message,
     time: date,
     admin: true,
@@ -111,7 +111,9 @@ router.post('/active-false', (req, res) => {
   )
     .populate('user')
     .then(ticket => {
+      console.log("my ticket", ticket)
       sendEmail(
+        process.env.ADMIN_EMAIL,
         ticket.user.email,
         `Ticket Chiuso | ${ticket.title}`,
         `Il ticket '${ticket.title}' è stato chiuso.` +
@@ -120,6 +122,7 @@ router.post('/active-false', (req, res) => {
     })
     .then(() => {
       res.redirect('/admin');
+      console.log("ticket chiuso")
     })
     .catch(err => {
       console.log(err);
