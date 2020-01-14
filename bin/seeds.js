@@ -3,12 +3,12 @@
 // To execute this seed, run from the root of the project
 // $ node bin/seeds.js
 
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const User = require('../models/User');
-const Ticket = require('../models/Ticket');
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+const User = require('../models/User')
+const Ticket = require('../models/Ticket')
 
-const bcryptSalt = 10;
+const bcryptSalt = 10
 
 mongoose
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
@@ -17,14 +17,14 @@ mongoose
   })
   .catch(err => {
     console.error('Errror connecting to mongo', err)
-  });
+  })
 
-let user = {
-  username: 'Simone',
-  password: bcrypt.hashSync('Simone123!', bcrypt.genSaltSync(bcryptSalt)),
-  email: "simone@vanillamarketing.it"
-};
-  
+const user = {
+  username: 'Enrico',
+  password: bcrypt.hashSync('***', bcrypt.genSaltSync(bcryptSalt)),
+  email: 'enrico@vanillamarketing.it'
+}
+
 // User.deleteMany()
 User.create(user)
   // .then(() => {
@@ -32,14 +32,14 @@ User.create(user)
   // })
   .then(usersCreated => {
     Ticket
-    console.log(`${usersCreated} user created with the following id:`);
+    console.log(`${usersCreated} user created with the following id:`)
     // console.log(usersCreated.map(u => u._id));
   })
   .then(() => {
     // Close properly the connection to Mongoose
-    mongoose.disconnect();
+    mongoose.disconnect()
   })
   .catch(err => {
-    mongoose.disconnect();
-    throw err;
-  });
+    mongoose.disconnect()
+    throw err
+  })
